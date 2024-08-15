@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:10;">
+    <g transform="matrix(1,0,0,1,-100,-24)">
+        <g id="node_colors">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d">
+        </g>
+        <g id="smooth_3d">
+        </g>
+        <g id="radial_impulse2d">
+        </g>
+        <g id="radial_impulse3d" transform="matrix(1,0,0,1,20,0)">
+            <g transform="matrix(1,-0,-0,1,80,24)">
+                <path d="M-9.089,2.328L-5.637,1.637L-6.328,5.089" style="fill:none;stroke:rgb(252,127,127);stroke-width:1px;"/>
+                <path d="M-12,8C-12,8 -7.364,3.364 -5.637,1.637" style="fill:none;stroke:rgb(252,127,127);stroke-width:1px;stroke-miterlimit:1.5;"/>
+            </g>
+            <g transform="matrix(1,-0,-0,1,80,24)">
+                <path d="M-6.328,10.911L-5.637,14.363L-9.089,13.672" style="fill:none;stroke:rgb(252,127,127);stroke-width:1px;"/>
+                <path d="M-12,8C-12,8 -7.364,12.636 -5.637,14.363" style="fill:none;stroke:rgb(252,127,127);stroke-width:1px;stroke-miterlimit:1.5;"/>
+            </g>
+        </g>
+        <g id="expandable_panel">
+            <g transform="matrix(0.571429,0,0,1,100.429,24)">
+                <path d="M15,3C15,1.896 13.432,1 11.5,1L4.5,1C2.568,1 1,1.896 1,3L1,13C1,14.104 2.568,15 4.5,15L11.5,15C13.432,15 15,14.104 15,13L15,3Z" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g>
+                <path d="M106,32L115,32" style="fill:none;"/>
+                <g transform="matrix(1,-0,-0,1,100,24)">
+                    <path d="M11.17,6.047L14.099,8L11.17,9.953" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;"/>
+                    <path d="M6,8L14.099,8" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;stroke-miterlimit:1.5;"/>
+                </g>
+            </g>
+        </g>
+        <g id="spin_slider">
+        </g>
+        <g id="zoom_in">
+        </g>
+        <g id="zoom_out">
+        </g>
+        <g id="zoom_reset">
+        </g>
+        <g id="grid_toggle">
+        </g>
+        <g id="snap_toggle">
+        </g>
+        <g id="updown">
+        </g>
+    </g>
+</svg>

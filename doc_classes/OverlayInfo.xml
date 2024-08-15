@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="OverlayInfo" inherits="Object" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Allows easy means to set [Label] texts through code.
+	</brief_description>
+	<description>
+		This is registered as a singleton, so no need to create an instance when using functions.
+		This is a debugging tool that provides means to use pure code to set [Label] texts. Such text output can be set "permanently" or set to be automatically removed after a specified amount of seconds.
+		The labels are added into an internal [PanelContainer], as an attempt to provide some background for better readability of the labels. A [Theme] resource can be directly assigned into this singleton if so desired.
+		Functions of this class can be directly called because this is a singleton.
+		By default all functionality of this class will be "empty" in release exports, meaning that any debugging code will essentially do nothing on release builds. Or in other words, there is no need to remove code using this class when releasing the game/application. To change this aspect the extension must be recompiled.
+		Another default behavior is related to how time is counted for "timed labels". It internally uses the "[code]_process()[/code]". If it's desired to use "[code]_physics_process()[/code]" instead, then open project settings, navigate to [code]Keh Extension Pack -&gt; Overlay Info[/code] then enable [code]use_physics_process[/code].
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="add_timed_label">
+			<return type="void" />
+			<param index="0" name="text" type="String" />
+			<param index="1" name="timeout" type="float" />
+			<description>
+				Adds a label with its text set to [param text] that will be automatically removed after [param timeout] seconds.
+			</description>
+		</method>
+		<method name="clear_labels">
+			<return type="void" />
+			<description>
+				Removes all labels. A tiny box (the internal [PanelContainer]) might remain on screen.
+			</description>
+		</method>
+		<method name="has_any_label">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if there is at least one label in the internal panel.
+			</description>
+		</method>
+		<method name="hide">
+			<return type="void" />
+			<description>
+				Hides the internal [PanelContainer], consequently hiding all labels.
+			</description>
+		</method>
+		<method name="remove_label">
+			<return type="void" />
+			<param index="0" name="label_id" type="StringName" />
+			<description>
+				Removes a non timed label identified by [param label_id]. See [method set_label].
+			</description>
+		</method>
+		<method name="set_horizontal_align_center">
+			<return type="void" />
+			<description>
+				Sets the horizontal alignment of the internal [PanelContainer] to the center.
+			</description>
+		</method>
+		<method name="set_horizontal_align_left">
+			<return type="void" />
+			<description>
+				Sets the horizontal alignment of the internal [PanelContainer] to the left.
+			</description>
+		</method>
+		<method name="set_horizontal_align_right">
+			<return type="void" />
+			<description>
+				Sets the horizontal alignment of the internal [PanelContainer] to the right.
+			</description>
+		</method>
+		<method name="set_label">
+			<return type="void" />
+			<param index="0" name="label_id" type="StringName" />
+			<param index="1" name="text" type="String" />
+			<description>
+				Creates or changes a "non timed label" identified by [param label_id], setting its text to [param text].
+			</description>
+		</method>
+		<method name="set_vertical_align_bottom">
+			<return type="void" />
+			<description>
+				Sets vertical alignment of the internal [PanelContainer] to the bottom.
+			</description>
+		</method>
+		<method name="set_vertical_align_center">
+			<return type="void" />
+			<description>
+				Sets vertical alignment of the internal [PanelContainer] to the center.
+			</description>
+		</method>
+		<method name="set_vertical_align_top">
+			<return type="void" />
+			<description>
+				Sets vertical alignment of the internal [PanelContainer] to the top.
+			</description>
+		</method>
+		<method name="show">
+			<return type="void" />
+			<description>
+				Makes the internal [PanelContainer] visible, consequently showing any label that might still exist in it.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="theme" type="Theme" setter="set_theme" getter="get_theme">
+			This will be directly assigned into the internal [PanelContainer], meaning that it's possible to fully style the panel and the labels in it.
+		</member>
+		<member name="visible" type="bool" setter="set_visible" getter="is_visible" default="false">
+			Controls the visibility of the internal [PanelContainer], which obviously affects all added labels.
+		</member>
+	</members>
+</class>

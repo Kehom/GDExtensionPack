@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AutoInterpolate" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Interpolates the transform of a target and applies the calculated data into a list of nodes and optionally children of this node.
+	</brief_description>
+	<description>
+		The [b]AutoInterpolate[/b] "switches" mode based on the target type. By default the target is the node this is attached to. However it's possible to manually select one.
+		If the [member target] is a [Node2D] then this will deal with [Transform2D] operations. However if [member target] is a [Node3D] then this will deal with [Transform3D] operations.
+		The list of affected nodes must match the type of operation mode this is set to work with.
+		By default children of this node are in the "affected list", that is, those that will get the calculated interpolated data applied to. This can be disabled setting [member interpolate_children] to [code]false[/code].
+		In the Inspector it's possible to assign additional nodes to be affected by this one, by simply clicking the assign button in the [code]interpolate 1[/code] property. Note that this is a dynamically generated one and another one will be generated if its value is not empty. In other words, this dynamic generation of properties allow the creation of a list of nodes that will have the interpolated data applied to.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="snap_to_target">
+			<return type="void" />
+			<description>
+				Calling this function effectively applies the target node transform into all affected ones, respecting the individual options of [enum InterpMode]
+			</description>
+		</method>
+		<method name="teleport_to2d">
+			<return type="void" />
+			<param index="0" name="transform" type="Transform2D" />
+			<description>
+				Allows specification of an arbitrary [Transform2D] to be directly applied into all affected nodes. This will respect the options of [enum InterpMode].
+			</description>
+		</method>
+		<method name="teleport_to3d">
+			<return type="void" />
+			<param index="0" name="transform" type="Transform3D" />
+			<description>
+				Allows specification of an arbitrary [Transform3D] to be directly applied into all affected nodes. This will respect the options of [enum InterpMode].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="interpolate_children" type="bool" setter="set_interpolate_children" getter="get_interpolate_children" default="true">
+			If this is [code]false[/code] then direct children of this node will not be affected by the interpolation.
+		</member>
+		<member name="interpolate_orientation" type="int" setter="set_interpolate_orientation" getter="get_interpolate_orientation" enum="AutoInterpolate.InterpMode" default="1">
+			Determines if the orientation of the transform will be taken into account when applying interpolation.
+		</member>
+		<member name="interpolate_scale" type="int" setter="set_interpolate_scale" getter="get_interpolate_scale" enum="AutoInterpolate.InterpMode" default="2">
+			Determines if the scale of the transform will be taken into account when applying interpolation.
+		</member>
+		<member name="interpolate_translation" type="int" setter="set_interpolate_translation" getter="get_interpolate_translation" enum="AutoInterpolate.InterpMode" default="1">
+			Determines if the translation of the transform will be taken into account when applying interpolation.
+		</member>
+		<member name="target" type="NodePath" setter="set_target" getter="get_target" default="NodePath(&quot;&quot;)">
+			Allow to manually tell which target will be used to provide data for interpolation. Or in other words, which node will be followed by this one.
+		</member>
+	</members>
+	<constants>
+		<constant name="Snap" value="0" enum="InterpMode">
+			In this mode the relevant element of the transform will not be interpolated, but directly match that of the [member target].
+		</constant>
+		<constant name="Full" value="1" enum="InterpMode">
+			In this mode the relevant element of the transform will be fully interpolated and will follow that of the [member target].
+		</constant>
+		<constant name="Ignore" value="2" enum="InterpMode">
+			In this mode the relevant element of the transform will be completely ignored and affected nodes can even differ from the [member target].
+		</constant>
+	</constants>
+</class>

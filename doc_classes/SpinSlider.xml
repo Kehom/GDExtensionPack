@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SpinSlider" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Provides numerical input while also allowing a slider to be shown.
+	</brief_description>
+	<description>
+		If minimum and maximum values are set and desired to be used, then this control will show a slider that allows editing the numerical value. Otherwise this will work very similarly to the [SpinBox].
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_as_ratio" qualifiers="const">
+			<return type="float" />
+			<description>
+				If both minimum and maximum values are used, then this will return the current value as a ratio (percent) in range [0..1].
+			</description>
+		</method>
+		<method name="get_line_edit" qualifiers="const">
+			<return type="LineEdit" />
+			<description>
+				Internally this uses a [LineEdit]. This function returns it. Please, do not delete it otherwise this control will fail!
+			</description>
+		</method>
+		<method name="set_as_ratio">
+			<return type="void" />
+			<param index="0" name="ratio" type="float" />
+			<description>
+				Allows setting current value as ratio (percent) in range [0..1]. Only works properly if minimum and maximum values are set.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="alignment" type="int" setter="set_alignment" getter="get_alignment" enum="HorizontalAlignment" default="0">
+			Determines the horizontal alignment of the numerical input in the internal [LineEdit].
+		</member>
+		<member name="allow_math_expression" type="bool" setter="set_allow_math_expression" getter="get_allow_math_expression" default="false">
+			If [code]true[/code], [b]simple[/b] math expressions can be added to calculate the final assigned [member value].
+		</member>
+		<member name="assign_minmax_on_right_click" type="bool" setter="set_assign_minmax_on_right_click" getter="get_assign_minmax_on_right_click" default="false">
+			If this is [code]true[/code], then right clicking the top half of the spin button will assign the maximum value into this control. Clicking on the bottom half will assign the minimum value.
+		</member>
+		<member name="no_spin_with_slider" type="bool" setter="set_no_spin_with_slider" getter="get_no_spin_with_slider" default="false">
+			If this is [code]true[/code] then the spin buttons will be hidden [i]if[/i] the slider is shown.
+		</member>
+		<member name="prefix" type="String" setter="set_prefix" getter="get_prefix" default="&quot;&quot;">
+			Adds a non editable prefix text that can be shown within the numerical input ([LineEdit]).
+		</member>
+		<member name="range_max_value" type="float" setter="set_max_value" getter="get_max_value" default="100.0">
+			Determines the maximum allowed value. Only properly works if [member range_use_max_value] is [code]true[/code].
+		</member>
+		<member name="range_min_value" type="float" setter="set_min_value" getter="get_min_value" default="0.0">
+			Determines the minimum allowed value. Only properly works if [member range_use_min_value] is [code]true[/code].
+		</member>
+		<member name="range_use_max_value" type="bool" setter="set_use_max_value" getter="get_use_max_value" default="false">
+			If [code]true[/code] then [member range_max_value] will be enforced as maximum value.
+		</member>
+		<member name="range_use_min_value" type="bool" setter="set_use_min_value" getter="get_use_min_value" default="false">
+			If [code]true[/code] then [member range_min_value] will be enforced as minimum value.
+		</member>
+		<member name="read_only" type="bool" setter="set_read_only" getter="get_read_only" default="false">
+			If [code]true[/code] then the input will be disabled and the value wont be changed by UI interaction, only code.
+		</member>
+		<member name="rounded_values" type="bool" setter="set_rounded_values" getter="get_rounded_values" default="false">
+			If [code]true[/code] then input values will be rounded to the closest integer.
+		</member>
+		<member name="select_all_on_focus" type="bool" setter="set_select_all_on_focus" getter="get_select_all_on_focus" default="true">
+			If [code]true[/code] then all "text" will be selected whenever this control receives focus.
+		</member>
+		<member name="step" type="float" setter="set_step" getter="get_step" default="1.0">
+			Determines the [i]delta[/i] (interval) used when changing the value by using the slider or the spin button.
+		</member>
+		<member name="suffix" type="String" setter="set_suffix" getter="get_suffix" default="&quot;&quot;">
+			Appends a non editable text that can be shown within the numerical input ([LineEdit])
+		</member>
+		<member name="update_on_text_changed" type="bool" setter="set_update_on_text_changed" getter="get_update_on_text_changed" default="false">
+			If [code]true[/code] then the value will be fully updated at each keystroke. This might clash with [member allow_math_expressions].
+		</member>
+		<member name="value" type="float" setter="set_value" getter="get_value" default="0.0">
+			The assigned numerical value.
+		</member>
+	</members>
+	<signals>
+		<signal name="value_changed">
+			<param index="0" name="value" type="float" />
+			<description>
+				Emitted when [member value] is changed/updated.
+			</description>
+		</signal>
+		<signal name="value_entered">
+			<param index="0" name="value" type="float" />
+			<description>
+				Emitted when the internal [LineEdit] notifies "text entered", that is, the [i]enter key[/i] has been pressed.
+			</description>
+		</signal>
+	</signals>
+</class>

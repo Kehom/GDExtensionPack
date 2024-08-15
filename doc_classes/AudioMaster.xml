@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AudioMaster" inherits="Node" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Allows audio playback through stream player pools.
+	</brief_description>
+	<description>
+		This nodes provides:
+		- Pools of audio stream players, one per configured Audio Bus.
+		- Volume control based on percent values instead of dB.
+		- Deal with bus names instead of indices.
+		This node dynamically populates the Inspector based on the audio bus layout configured in the project, under the [code]Pre Config[/code] category. Each audio bus will generate a sub-category with name matching that bus. The properties that can be set are related to the audio stream player pools associated with that bus. That said, the options are:
+		- [code]type[/code] - Determines which stream player node should be created and added into the pool if [constant PlayerNormal] then the pool will create [AudioStreamPlayer]. If [constant Player2D] then [AudioStreamPlayer2D] and if [constant Player3D] the nodes will be [AudioStreamPlayer3D].
+		- [code]max_players[/code] - The maximum amount of audio stream players should be created for this pool. Set to [code]0[/code] to not impose a limit.
+		- [code]pre_allocate[/code] - If positive, once the [b]AudioMaster[/b] enters the tree it will pre-allocate this amount of audio stream players for this pool, respecting the [code]max_players[/code].
+		- [code]volume[/code] - Audio volume in percent (range [0..1]) that will be assigned into the audio bus associated with this pool once [b]AudioMaster[/b] enters the tree.
+		- [code]process_mode[/code] - Determines the behavior of stream player nodes based on the pause state of the game. This is the same of [member Node.process_mode].
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="allocate_player">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="num" type="int" />
+			<description>
+				Request allocation of [param num] stream players associated with the audio bus [param bus_name].
+				Note that if a maximum amount of players is configured for that "pool" (audio bus), then that value will be respected.
+			</description>
+		</method>
+		<method name="get_available_player_index" qualifiers="const">
+			<return type="int" />
+			<param index="0" name="bus_name" type="String" />
+			<description>
+				Returns the index of a stream player associated with [param bus_name] that is not currently in used. If there isn't any available player then this will return -1.
+			</description>
+		</method>
+		<method name="get_bus_volume_percent" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="bus_name" type="String" />
+			<description>
+				Returns a percent value (range [0..1]) of the audio volume set in the audio bus [param bus_name].
+			</description>
+		</method>
+		<method name="get_details_info" qualifiers="const">
+			<return type="Array" />
+			<description>
+				Returns debug data related to the various audio stream player pools. More specifically, each entry in the returned array is a [Dictionary] that contains the following data:
+				- [code]bus[/code] - Name of the associated audio bus (represents one stream player pool).
+				- [code]player_count[/code] - Total amount of allocated stream player nodes.
+				- [code]playing[/code] - How many of the player nodes are currently playing an audio.
+				- [code]available[/code] - How many of the player nodes are currently available to play an audio.
+				- [code]type[/code] - A string that is either [b]Normal[/b], [b]2D[/b] or [b]3D[/b]
+			</description>
+		</method>
+		<method name="get_playback_position" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="player_index" type="int" />
+			<description>
+				Returns the "position" in seconds of the audio playback in the stream player found at [param player_index] that is part of the "pool" (bus) [param bus_name].
+			</description>
+		</method>
+		<method name="is_playing" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Returns [code]true[/code] if the stream player node at [param player_index] in the "pool" [param bus_name] is currently playing an audio.
+			</description>
+		</method>
+		<method name="is_used" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="index" type="int" />
+			<description>
+				Returns [code]true[/code] if the stream player node at [param player_index] in the "pool" [param bus_name] is currently not available for playback.
+			</description>
+		</method>
+		<method name="load_and_play">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="path" type="String" />
+			<param index="2" name="index" type="int" default="-1" />
+			<param index="3" name="fade_time" type="float" default="0.0" />
+			<param index="4" name="extra" type="Dictionary" default="{}" />
+			<description>
+				Attempts to load an audio resource found at [param path] and play it using a stream player associated with [param bus_name].
+				For more information about the other parameters check [method play_audio].
+			</description>
+		</method>
+		<method name="play_audio">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="stream" type="AudioStream" />
+			<param index="2" name="index" type="int" default="-1" />
+			<param index="3" name="fade_time" type="float" default="0.0" />
+			<param index="4" name="extra" type="Dictionary" default="{}" />
+			<description>
+				Plays the incoming audio [param stream] using a stream player associated with [param bus_name].
+				If [param index] is negative then an available stream player node will be used, otherwise this can be used to explicitly specify which node to use.
+				[param fade_time] specify a duration in seconds in which a "fade-in" effect will occur.
+				[param extra] can be used to provide additional setup regarding the playback. Generally, entries in this dictionary are directly assigned into properties of the audio stream player that is "chosen" to be used. Every single entry is optional and if not provided the default value will be used.
+				Bellow are the possible options ([param extra] keys) regardless of stream player type:
+				- [code]start_from[/code] (default 0) - Begin playback at this position in seconds.
+				- [code]pitch_scale[/code] (default 1.0) - The pitch and the tempo of the audio, as a multiplier of the sample rate.
+				Then there are the options in case the [param bus_name] is configured for [b]type[/b] [constant PlayerNormal]:
+				- [code]mix_target[/code] (default [constant AudioStreamPlayer.MIX_TARGET_STEREO]) - Directly assigns [member AudioStreamPlayer.mix_target]
+				The options in case [param bus_name] is configured for [b]type[/b] = [constant Player2D]:
+				- [code]position[/code] (default Vector2()) - Specify the [b]global[/b] position of the stream player node just before playback.
+				- [code]area_mask[/code] - Directly assign the [member AudioStreamPlayer2D.area_mask] property.
+				- [code]attenuation[/code] - Directly assign the [member AudioStreamPlayer2D.attenuation] property.
+				- [code]max_distance[/code] - Directly assign the [member AudioStreamPlayer2D.max_distance] property.
+				- [code]panning_strength[/code] - Directly assign the [member AudioStreamPlayer2D.panning_strength] property.
+				The options in case [param bus_name] is configured for [b]type[/b] = [constant Player3D]:
+				- [code]position[/code] (default Vector3()) - Specify the [b]global[/b] position of the stream player node just before playback.
+				- [code]area_mask[/code] - Directly assign the [member AudioStreamPlayer3D.area_mask] property.
+				- [code]attenuation_filter_cutoff_hz[/code] - Directly assign the [member AudioStreamPlayer3D.attenuation_filter_cutoff_hz] property.
+				- [code]attenuation_filter_db[/code] - Directly assign the [member AudioStreamPlayer3D.attenuation_filter_db] property.
+				- [code]attenuation_model[/code] - Directly assign the [member AudioStreamPlayer3D.attenuation_model] property.
+				- [code]doppler_tracking[/code] - Directly assign the [member AudioStreamPlayer3D.doppler_tracking] property.
+				- [code]emission_angle_degrees[/code] - Directly assign the [member AudioStreamPlayer3D.emission_angle_degrees] property.
+				- [code]emission_angle_enabled[/code] - Directly assign the [member AudioStreamPlayer3D.emission_angle_enabled] property.
+				- [code]emission_angle_filter_attenuation_db[/code] - Directly assign the [member AudioStreamPlayer3D.emission_angle_filter_attenuation_db] property.
+				- [code]max_db[/code] - Directly assign the [member AudioStreamPlayer3D.max_db] property.
+				- [code]max_distance[/code] - Directly assign the [member AudioStreamPlayer3D.max_distance] property.
+				- [code]panning_strength[/code] - Directly assign the [member AudioStreamPlayer3D.panning_strength] property.
+				- [code]unit_size[/code] - Directly assign the [member AudioStreamPlayer3D.unit_size] property.
+			</description>
+		</method>
+		<method name="set_bus_volume_percent">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="new_volume" type="float" />
+			<param index="2" name="during" type="float" default="0.0" />
+			<description>
+				Change the [param bus_name] audio bus volume to the [param new_volume], which must be a percent value (in range [0..1]).
+				If [param during] is positive then specify an amount of seconds during which the volume will be changed from current one into the specified value.
+			</description>
+		</method>
+		<method name="set_maximum_players">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="amount" type="int" />
+			<description>
+				Tells [b]AudioMaster[/b] that the pool associated with [param bus_name] should not have more than [param amount] stream player nodes. If the pool is already beyond maximum then the exceeding ones will be removed. Be careful because it might result in audio playback being interrupted.
+			</description>
+		</method>
+		<method name="set_playback_position">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="player_index" type="int" />
+			<param index="2" name="position" type="float" />
+			<description>
+				"Seek", or set [param position] in seconds, the playback in the stream player node [param player_index], which is in the [param bus_name]
+			</description>
+		</method>
+		<method name="set_player_process_mode">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="mode" type="int" enum="Node.ProcessMode" />
+			<description>
+				Determines the behavior of the stream player nods associated with [param bus_name] regarding pause state of the game
+			</description>
+		</method>
+		<method name="set_player_type">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="type" type="int" enum="AudioMaster.PlayerType" />
+			<description>
+				Choose which audio stream player node type will be created to fill the pool associated with the audio bus [param bus_name]. More specifically if [param type] is:
+				- [constant PlayerNormal] results in the creation of [AudioStreamPlayer] nodes.
+				- [constant Player2D] results in the creation of [AudioStreamPlayer2D] nodes.
+				- [constant Player3D] results in the creation of [AudioStreamPlayer3D] nodes.
+			</description>
+		</method>
+		<method name="stop">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="fade_time" type="float" default="0.0" />
+			<description>
+				Request to stop audio playback of the node at [param index] in the [param bus_name].
+				If [param fade_time] is positive then this specify the duration in seconds of a fade-out effect.
+			</description>
+		</method>
+		<method name="stop_all">
+			<return type="void" />
+			<param index="0" name="fade_time" type="float" default="0.0" />
+			<description>
+				Request to stop audio playback of all stream player nodes in all pools.
+				If [param fade_time] is positive then this specify the duration in seconds of a fade-out effect.
+			</description>
+		</method>
+		<method name="stop_all_in_bus">
+			<return type="void" />
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="fade_time" type="float" default="0.0" />
+			<description>
+				Request to stop audio playback of all stream player nodes associated with [param bus_name].
+				If [param fade_time] is positive then this specify the duration in seconds of a fade-out effect.
+			</description>
+		</method>
+	</methods>
+	<signals>
+		<signal name="playback_finished">
+			<param index="0" name="bus_name" type="String" />
+			<param index="1" name="player_index" type="int" />
+			<description>
+				This signal is emitted whenever audio playback ends.
+				[param bus_name] tell which "pool" the stream player node belongs to.
+				[param player_index] tells which stream player has triggered the event.
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="PlayerNormal" value="0" enum="PlayerType">
+			If this is assigned into the [b]type[/b] property of a pool, then all stream player nodes created for that specific one will be of [AudioStreamPlayer].
+		</constant>
+		<constant name="Player2D" value="1" enum="PlayerType">
+			If this is assigned into the [b]type[/b] property of a pool, then all stream player nodes created for that specific one will be of [AudioStreamPlayer2D].
+		</constant>
+		<constant name="Player3D" value="2" enum="PlayerType">
+			If this is assigned into the [b]type[/b] property of a pool, then all stream player nodes created for that specific one will be of [AudioStreamPlayer3D].
+		</constant>
+	</constants>
+</class>

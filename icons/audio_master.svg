@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-180,-24)">
+        <g id="node_colors">
+        </g>
+        <g id="music_note_8th">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d">
+        </g>
+        <g id="smooth_3d">
+        </g>
+        <g id="radial_impulse2d">
+        </g>
+        <g id="radial_impulse3d">
+        </g>
+        <g id="expandable_panel">
+        </g>
+        <g id="spin_slider">
+        </g>
+        <g id="zoom_in">
+        </g>
+        <g id="zoom_out">
+        </g>
+        <g id="zoom_reset">
+        </g>
+        <g id="grid_toggle">
+        </g>
+        <g id="snap_toggle">
+        </g>
+        <g id="updown">
+        </g>
+        <g id="scroll_up">
+        </g>
+        <g id="scroll_down">
+        </g>
+        <g id="scroll_right">
+        </g>
+        <g id="scroll_left">
+        </g>
+        <g id="accordion">
+        </g>
+        <g id="accordion_item">
+        </g>
+        <g id="audio_master">
+            <g transform="matrix(1,0,0,1,0,1)">
+                <path d="M187,29L187,38L184,36L181,36L181,31L184,31L187,29Z" style="fill:rgb(224,224,224);"/>
+            </g>
+            <g id="music_note_8th1" serif:id="music_note_8th" transform="matrix(0.129422,0,0,0.129422,134.483,6.07687)">
+                <g transform="matrix(0.908564,-0.417745,0.49444,1.07537,-75.666,164.076)">
+                    <ellipse cx="427.758" cy="232.182" rx="14.908" ry="9.095" style="fill:rgb(224,224,224);stroke:rgb(224,224,224);stroke-width:0.91px;"/>
+                </g>
+                <g transform="matrix(1,0,0,1,0.339649,0.046613)">
+                    <path d="M440.436,231.505L440.436,151.097" style="fill:none;stroke:rgb(224,224,224);stroke-width:3px;"/>
+                </g>
+                <path d="M440.776,150.145C446.665,171.454 463.961,179.912 465.897,199.089C466.048,208.205 462.597,217.818 456.808,224.477C460.68,213.388 463.885,203.367 462.426,195.632C459.948,184.702 453.791,182.45 448.547,179.571L440.776,177.179L440.776,150.145Z" style="fill:rgb(224,224,224);"/>
+            </g>
+        </g>
+    </g>
+</svg>

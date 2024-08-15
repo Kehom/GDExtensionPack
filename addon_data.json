@@ -1,0 +1,238 @@
+[
+   {
+      "file": "src/dbghelper/line3d.cpp",
+      "disabled_def": "LINE3D_DISABLED",
+      "implements": [
+         {
+            "name": "Line3D",
+            "key": "line3d_enabled",
+            "help": "Brings the Line3D singleton, which allows drawing debug lines in 3D.",
+            "icon": "",
+            "requires": [],
+            "extra_options": [
+               {
+                  "key": "line3d_empty",
+                  "default": 0,
+                  "help": "Instead of completely removing Line3D from the plugin list, make it empty. Can be useful for release builds without requiring to remove debug code.",
+                  "def": "EMPTY_LINE3D"
+               }
+            ]
+         }
+      ]
+   },
+
+   {
+      "file": "src/dbghelper/overlayinfo.cpp",
+      "disabled_def": "OVERLAY_INFO_DISABLED",
+      "implements": [
+         {
+            "name": "OverlayInfo",
+            "key": "overlayinfo_enabled",
+            "help": "Provides the OverlayInfo singleton to help display labels on screen.",
+            "icon": "",
+            "requires": [],
+            "extra_options": [
+               {
+                  "key": "overlayinfo_empty",
+                  "default": 0,
+                  "help": "Instead of completely disabling the OverlayInfo, makes it empty. Can be useful for release builds without requiring to remove calls to OverlayInfo.",
+                  "def": "EMPTY_OVERLAY_INFO"
+               }
+            ]
+         }
+      ]
+   },
+
+
+   {
+      "file": "src/general/quantize.cpp",
+      "disabled_def": "QUANTIZE_DISABLED",
+      "implements": [
+         {
+            "name": "Quantize",
+            "key": "quantize_enabled",
+            "help": "Include the Quantize singleton to perform lossy encoded compression of floating point numbers.",
+            "icon": "",
+            "requires": []
+         }
+      ]
+   },
+
+
+
+   {
+      "file": "src/nodes/audiomaster.cpp",
+      "disabled_def": "AUDIO_MASTER_DISABLED",
+      "implements": [
+         {
+            "name": "AudioMaster",
+            "key": "audiomaster_enabled",
+            "help": "AudioMaster to help deal with audio playback without having to worry about node lifetime",
+            "icon": "audio_master.svg",
+            "requires": []
+         }
+      ]
+   },
+
+   {
+      "file": "src/nodes/autointerpolate.cpp",
+      "disabled_def": "INTERPOLATION_DISABLED",
+      "implements": [
+         {
+            "name": "AutoInterpolate",
+            "key": "autointerpolate_enabled",
+            "help": "Adds a node that automatically interpolate a set of nodes based on a configurable target. This single node can deal with both 2D and 3D.",
+            "icon": "auto_interpolate.svg",
+            "disabled_def": "AUTO_INTERPOLATE_DISABLED",
+            "requires": []
+         },
+         {
+            "name": "Smooth2D",
+            "key": "smooth2d_enabled",
+            "help": "Adds Smooth2D which is specifically coded to interpolate 2D nodes.",
+            "icon": "smooth2d.svg",
+            "disabled_def": "SMOOTH2D_DISABLED",
+            "requires": []
+         },
+         {
+            "name": "Smooth3D",
+            "key": "smooth3d_enabled",
+            "help": "Adds Smooth3D which is specifically coded to interpolate 3D nodes.",
+            "icon": "smooth3d.svg",
+            "disabled_def": "SMOOTH3D_DISABLED",
+            "requires": []
+         }
+      ]
+   },
+
+   
+
+   {
+      "file": "src/nodes/radialimpulse.cpp",
+      "disabled_def": "",
+      "implements": [
+         {
+            "name": "RadialImpulse2D",
+            "key": "radial_impulse2d_enabled",
+            "help": "Adds RadialImpulse2D to apply impulses into 2D rigid bodies in a circular area",
+            "icon": "radial_impulse2d.svg",
+            "disabled_def": "RADIAL_IMPULSE2D_DISABLED",
+            "requires": []
+         },
+         {
+            "name": "RadialImpulse3D",
+            "key": "radial_impulse3d_enabled",
+            "help": "Adds RadialImpulse3D to apply impulses into 3D rigid bodies in a spherical volume",
+            "icon": "radial_impulse3d.svg",
+            "disabled_def": "RADIAL_IMPULSE3D_DISABLED",
+            "requires": []
+         }
+      ]
+   },
+
+
+
+   {
+      "file": "src/ui/accordion/accordion.cpp",
+      "disabled_def": "ACCORDION_DISABLED",
+      "implements": [
+         {
+            "name": "AccordionItem",
+            "shared_key": "accordion_enabled",
+            "icon": "accordion_item.svg",
+            "requires": ["accordion_enabled"]
+         },
+         {
+            "name": "Accordion",
+            "key": "accordion_enabled",
+            "help": "A container that shows/hides children controls based on toggling corresponding buttons.",
+            "icon": "accordion.svg",
+            "requires": []
+         }
+      ]
+   },
+
+   {
+      "file": "src/ui/expandable_panel/expanel.cpp",
+      "disabled_def": "EXPANDABLE_PANEL_DISABLED",
+      "implements": [
+         {
+            "name": "ExpandablePanel",
+            "key": "expandable_panel_enabled",
+            "help": "Add a panel that attaches into a border of the window which can shrink/expand to hide/show contents, with multiple tabs supported.",
+            "icon": "expandable_panel.svg",
+            "requires": []
+         }
+      ]
+   },
+
+   {
+      "file": "src/ui/filedir_picker/filedir_picker.cpp",
+      "disabled_def": "FILEDIRPICKER_DISABLED",
+      "implements": [
+         {
+            "name": "FileDirPicker",
+            "key": "filedir_picker_enabled",
+            "help": "Provides a control that allows selecting a file or a directory, showing the selected 'value' in a LineEdit.",
+            "icon": "filedir_picker.svg",
+            "requires": []
+         }
+      ]
+   },
+
+   {
+      "file": "src/ui/spin_slider/spin_slider.cpp",
+      "disabled_def": "SPIN_SLIDER_DISABLED",
+      "implements": [
+         {
+            "name": "SpinSlider",
+            "key": "spin_slider_enabled",
+            "help": "Implements a SpinBox that displays a Slider if its range if well defined.",
+            "icon": "spin_slider.svg",
+            "requires": []
+         }
+      ]
+   },
+
+   {
+      "file": "src/ui/tabular_box/tabular_box.cpp",
+      "disabled_def": "TABULAR_BOX_DISABLED",
+      "implements": [
+         {
+            "name": "TabularBox",
+            "key": "tabular_box_enabled",
+            "help": "A Control to deal with tabular data",
+            "icon": "tabular_box.svg",
+            "requires": [],
+            "extra_files": [
+               "src/ui/tabular_box/tabular_box_cell.cpp",
+               "src/ui/tabular_box/data_source_simple.cpp",
+               "src/ui/tabular_box/data_source.cpp",
+               "src/ui/tabular_box/tabular_header.cpp"
+            ]
+         }
+      ]
+   },
+
+
+
+   {
+      "file": "src/other/database/database.cpp",
+      "disabled_def": "DATABASE_DISABLED",
+      "implements": [
+         {
+            "name": "GDDatabase",
+            "key": "database_enabled",
+            "help": "Provides a Database format with an editor to be used directly within Godot",
+            "icon": "",
+            "requires": [ "tabular_box_enabled" ],
+            "extra_files": [
+               "src/other/database/dbtable.cpp",
+               "src/other/database/editor/dbdatasource.cpp",
+               "src/other/database/editor/dbeplugin.cpp",
+               "src/other/database/editor/tabular_cells.cpp"
+            ]
+         }
+      ]
+   }
+]

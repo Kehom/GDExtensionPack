@@ -1,0 +1,341 @@
+[gd_scene load_steps=3 format=3 uid="uid://15oltislkm0o"]
+
+[ext_resource type="Script" path="res://scripts/amaster_helper.gd" id="1_37xyy"]
+[ext_resource type="Script" path="res://levels/nodes/demo_audiomaster.gd" id="1_ho87h"]
+
+[node name="demo_audiomaster" type="Node2D"]
+script = ExtResource("1_ho87h")
+
+[node name="audio_master" type="AudioMaster" parent="."]
+pre_config/Music/max_players = 2
+pre_config/Music/pre_allocate = 2
+pre_config/SFX/max_players = 16
+pre_config/SFX2D/type = 1
+pre_config/SFX2D/max_players = 16
+pre_config/SFX3D/type = 2
+pre_config/SFX3D/max_players = 16
+pre_config/UI/max_players = 6
+
+[node name="info_updater" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="expanel" type="ExpandablePanel" parent="ui"]
+current_page = 0
+__expanded_width = 192
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 192.0
+grow_vertical = 2
+
+[node name="vbsettings" type="VBoxContainer" parent="ui/expanel"]
+layout_mode = 2
+metadata/_page_name = "Settings"
+
+[node name="lbl_device" type="Label" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text = "Device"
+
+[node name="opt_device" type="OptionButton" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text_overrun_behavior = 4
+clip_text = true
+fit_to_longest_item = false
+
+[node name="spacer1" type="Control" parent="ui/expanel/vbsettings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_sfxtype" type="Label" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text = "SFX Type"
+
+[node name="opt_sfxtype" type="OptionButton" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text_overrun_behavior = 3
+clip_text = true
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Normal"
+popup/item_1/text = "2D"
+popup/item_1/id = 1
+popup/item_2/text = "3D"
+popup/item_2/id = 2
+
+[node name="spacer2" type="Control" parent="ui/expanel/vbsettings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_outvol" type="Label" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text = "Output volume:"
+
+[node name="hmaster" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hmaster"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hmaster"]
+step = 0.05
+no_spin_with_slider = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="hmusic" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hmusic"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hmusic"]
+step = 0.05
+no_spin_with_slider = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="hsfx" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hsfx"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hsfx"]
+step = 0.05
+no_spin_with_slider = true
+assign_minmax_on_right_click = false
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="hsfx2D" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hsfx2D"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX2D"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hsfx2D"]
+step = 0.05
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="hsfx3D" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hsfx3D"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SFX3D"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hsfx3D"]
+step = 0.05
+no_spin_with_slider = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="hui" type="HBoxContainer" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+
+[node name="lbl_bus" type="Label" parent="ui/expanel/vbsettings/hui"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "UI"
+
+[node name="sp_vol" type="SpinSlider" parent="ui/expanel/vbsettings/hui"]
+step = 0.05
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 1.0
+layout_mode = 2
+
+[node name="spacer3" type="Control" parent="ui/expanel/vbsettings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_info" type="Label" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 9
+text = "All three audio tracks have been composed by Rafael Krux. Downloaded from:
+https://freepd.com
+
+Sound effects by Kenney
+https://kenney.nl
+
+Person texture/sprite also by Kenney"
+autowrap_mode = 2
+
+[node name="spacer4" type="Control" parent="ui/expanel/vbsettings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bt_back" type="Button" parent="ui/expanel/vbsettings"]
+layout_mode = 2
+text = "Back"
+
+[node name="pnl_info" type="Panel" parent="ui/expanel"]
+visible = false
+layout_mode = 2
+metadata/_page_name = "Debug Info"
+
+[node name="lbl_info" type="Label" parent="ui/expanel/pnl_info"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 14
+
+[node name="pnl_bottom" type="Panel" parent="ui"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = -64.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="lbl_musicpback" type="Label" parent="ui/pnl_bottom"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "Music Playback"
+horizontal_alignment = 1
+
+[node name="hbox" type="HBoxContainer" parent="ui/pnl_bottom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lbl_fade" type="Label" parent="ui/pnl_bottom/hbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Fade time"
+
+[node name="sp_fade" type="SpinSlider" parent="ui/pnl_bottom/hbox"]
+suffix = "sec"
+step = 0.05
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 3.0
+value = 1.5
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="spacer1" type="Control" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="bt_music1" type="Button" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+text = "Action Strike"
+
+[node name="bt_music2" type="Button" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+text = "Dreams of Vain"
+
+[node name="bt_music3" type="Button" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+toggle_mode = true
+text = "Epic Boss Battle"
+
+[node name="spacer2" type="Control" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="bp_palybackpos" type="ProgressBar" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+show_percentage = false
+
+[node name="spacer3" type="Control" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="bt_stop" type="Button" parent="ui/pnl_bottom/hbox"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 12
+text = "Stop"
+
+[node name="sfxhelper" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_bottom = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37xyy")
+
+[node name="listener2d" type="AudioListener2D" parent="ui/sfxhelper"]
+position = Vector2(480, 296)
+current = true
+
+[node name="setup3d" type="Node3D" parent="."]
+
+[node name="cam" type="Camera3D" parent="setup3d"]
+
+[connection signal="playback_finished" from="audio_master" to="." method="_on_audio_master_playback_finished"]
+[connection signal="timeout" from="info_updater" to="." method="_on_info_updater_timeout"]
+[connection signal="item_selected" from="ui/expanel/vbsettings/opt_device" to="." method="_on_opt_device_item_selected"]
+[connection signal="mouse_entered" from="ui/expanel/vbsettings/bt_back" to="." method="_on_button_mouse_over"]
+[connection signal="pressed" from="ui/expanel/vbsettings/bt_back" to="." method="_on_bt_back_pressed"]
+[connection signal="mouse_entered" from="ui/pnl_bottom/hbox/bt_music1" to="." method="_on_button_mouse_over"]
+[connection signal="toggled" from="ui/pnl_bottom/hbox/bt_music1" to="." method="_on_bt_music_1_toggled"]
+[connection signal="mouse_entered" from="ui/pnl_bottom/hbox/bt_music2" to="." method="_on_button_mouse_over"]
+[connection signal="toggled" from="ui/pnl_bottom/hbox/bt_music2" to="." method="_on_bt_music_2_toggled"]
+[connection signal="mouse_entered" from="ui/pnl_bottom/hbox/bt_music3" to="." method="_on_button_mouse_over"]
+[connection signal="toggled" from="ui/pnl_bottom/hbox/bt_music3" to="." method="_on_bt_music_3_toggled"]
+[connection signal="gui_input" from="ui/pnl_bottom/hbox/bp_palybackpos" to="." method="_on_bp_palybackpos_gui_input"]
+[connection signal="mouse_entered" from="ui/pnl_bottom/hbox/bt_stop" to="." method="_on_button_mouse_over"]
+[connection signal="pressed" from="ui/pnl_bottom/hbox/bt_stop" to="." method="_on_bt_stop_pressed"]
+[connection signal="source_chosen" from="ui/sfxhelper" to="." method="_on_sfxhelper_source_chosen"]

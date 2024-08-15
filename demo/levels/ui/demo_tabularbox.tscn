@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://hl7kxao4bvug"]
+
+[ext_resource type="Script" path="res://levels/ui/demo_tabularbox.gd" id="1_l5u1a"]
+[ext_resource type="TabularDataSource" uid="uid://cdlhtu4w835pm" path="res://resources/other/datasource_custom.tres" id="2_lncp7"]
+
+[node name="demo_tabularbox" type="Node2D"]
+script = ExtResource("1_l5u1a")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="expanel" type="ExpandablePanel" parent="ui"]
+current_page = 0
+__expanded_width = 216
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 216.0
+grow_vertical = 2
+
+[node name="vbox" type="VBoxContainer" parent="ui/expanel"]
+layout_mode = 2
+
+[node name="lbl_title_align" type="Label" parent="ui/expanel/vbox"]
+layout_mode = 2
+text = "Title alignment"
+
+[node name="opt_title_align" type="OptionButton" parent="ui/expanel/vbox"]
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Left"
+popup/item_1/text = "Center"
+popup/item_1/id = 1
+popup/item_2/text = "Right"
+popup/item_2/id = 2
+popup/item_3/text = "Fill"
+popup/item_3/id = 3
+
+[node name="spacer1" type="Control" parent="ui/expanel/vbox"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_rnum_align" type="Label" parent="ui/expanel/vbox"]
+layout_mode = 2
+text = "Row numbers align"
+
+[node name="opt_rnum_align" type="OptionButton" parent="ui/expanel/vbox"]
+layout_mode = 2
+selected = 2
+item_count = 4
+popup/item_0/text = "Left"
+popup/item_1/text = "Center"
+popup/item_1/id = 1
+popup/item_2/text = "Right"
+popup/item_2/id = 2
+popup/item_3/text = "Fill"
+popup/item_3/id = 3
+
+[node name="chk_showrnum" type="CheckBox" parent="ui/expanel/vbox"]
+layout_mode = 2
+button_pressed = true
+text = "Show row numbers"
+
+[node name="chk_showchks" type="CheckBox" parent="ui/expanel/vbox"]
+layout_mode = 2
+button_pressed = true
+text = "Show checkboxes"
+
+[node name="spacer2" type="Control" parent="ui/expanel/vbox"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="spacer3" type="Control" parent="ui/expanel/vbox"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="chk_allowctxmenu" type="CheckBox" parent="ui/expanel/vbox"]
+layout_mode = 2
+button_pressed = true
+text = "Allow context menu"
+
+[node name="spacer4" type="Control" parent="ui/expanel/vbox"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bt_save" type="Button" parent="ui/expanel/vbox"]
+layout_mode = 2
+text = "Save"
+
+[node name="spacer5" type="Control" parent="ui/expanel/vbox"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="bt_back" type="Button" parent="ui/expanel/vbox"]
+layout_mode = 2
+text = "Back"
+
+[node name="tabular_box" type="TabularBox" parent="ui"]
+data_source = ExtResource("2_lncp7")
+autosave_source = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+offset_top = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="txt_filter" type="LineEdit" parent="ui"]
+offset_left = 224.0
+offset_top = 8.0
+offset_right = 512.0
+offset_bottom = 39.0
+placeholder_text = "filter..."
+clear_button_enabled = true
+
+[connection signal="item_selected" from="ui/expanel/vbox/opt_title_align" to="." method="_on_opt_title_align_item_selected"]
+[connection signal="item_selected" from="ui/expanel/vbox/opt_rnum_align" to="." method="_on_opt_rnum_align_item_selected"]
+[connection signal="toggled" from="ui/expanel/vbox/chk_showrnum" to="." method="_on_chk_showrnum_toggled"]
+[connection signal="toggled" from="ui/expanel/vbox/chk_showchks" to="." method="_on_chk_showchks_toggled"]
+[connection signal="toggled" from="ui/expanel/vbox/chk_allowctxmenu" to="." method="_on_chk_allowctxmenu_toggled"]
+[connection signal="pressed" from="ui/expanel/vbox/bt_save" to="." method="_on_bt_save_pressed"]
+[connection signal="pressed" from="ui/expanel/vbox/bt_back" to="." method="_on_bt_back_pressed"]
+[connection signal="text_changed" from="ui/txt_filter" to="." method="_on_txt_filter_text_changed"]

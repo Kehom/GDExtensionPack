@@ -1,0 +1,43 @@
+[gd_resource type="DBTable" format=3 uid="uid://bm3d7adr32l1d"]
+
+[resource]
+table_id = "i0uvobxsudxd"
+table_name = &"outer_table"
+id_type = 4
+locked_row_id = true
+column = [{
+"title": "enabled",
+"value_type": 1001
+}, {
+"title": "txt",
+"value_type": 1000
+}]
+row_list = [{
+"enabled": true,
+"id": "u2bjgbo4jbks25nt",
+"txt": "random"
+}, {
+"enabled": true,
+"id": "30le77vmb46lfm6y",
+"txt": "text"
+}, {
+"enabled": false,
+"id": "qiberxjvhbr9xfm9",
+"txt": "to"
+}, {
+"enabled": true,
+"id": "lysiubf6cukbtxo1",
+"txt": "test"
+}, {
+"enabled": false,
+"id": "9pbbron5z5llwcdg",
+"txt": "database"
+}, {
+"enabled": true,
+"id": "4o4bi4bjfqm9yboa",
+"txt": "string"
+}, {
+"enabled": false,
+"id": "8g353o065zdfkq5g",
+"txt": "cell"
+}]

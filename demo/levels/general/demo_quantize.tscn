@@ -1,0 +1,352 @@
+[gd_scene load_steps=7 format=3 uid="uid://4vi6xglfdcki"]
+
+[ext_resource type="Script" path="res://levels/general/demo_quantize.gd" id="1_6xr3q"]
+[ext_resource type="ButtonGroup" uid="uid://4ixx8tliphhw" path="res://resources/button_groups/btgrp_quantize.tres" id="2_c1r55"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8fw3"]
+albedo_color = Color(0.180392, 0.207843, 0.505882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v2q1x"]
+material = SubResource("StandardMaterial3D_h8fw3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vucmg"]
+albedo_color = Color(0.521569, 0.282353, 0.14902, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xdg4"]
+material = SubResource("StandardMaterial3D_vucmg")
+
+[node name="demo_quantize" type="Node3D"]
+script = ExtResource("1_6xr3q")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="expanel" type="ExpandablePanel" parent="ui"]
+current_page = 0
+__expanded_width = 216
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 216.0
+grow_vertical = 2
+
+[node name="settings" type="VBoxContainer" parent="ui/expanel"]
+layout_mode = 2
+metadata/_page_name = "Settings"
+
+[node name="lbl_pivot" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Pivot"
+
+[node name="lbl_yrotation" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Y Rotation Speed"
+
+[node name="sl_pivyrotation" type="SpinSlider" parent="ui/expanel/settings"]
+step = 0.1
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_min_value = -3.0
+range_use_max_value = true
+range_max_value = 3.0
+layout_mode = 2
+
+[node name="spacer1" type="Control" parent="ui/expanel/settings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_zrotation" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Z Rotation Speed"
+
+[node name="sl_pivzrotation" type="SpinSlider" parent="ui/expanel/settings"]
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_use_max_value = true
+range_max_value = 70.0
+layout_mode = 2
+
+[node name="spacer2" type="Control" parent="ui/expanel/settings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_cube" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Cube
+"
+
+[node name="lbl_cubexrotation" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "X Rotation Speed"
+
+[node name="sl_cubexrotation" type="SpinSlider" parent="ui/expanel/settings"]
+step = 0.1
+no_spin_with_slider = true
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_min_value = -3.5
+range_use_max_value = true
+range_max_value = 3.5
+layout_mode = 2
+
+[node name="spacer3" type="Control" parent="ui/expanel/settings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lbl_bitspercomp" type="Label" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Bits/component"
+clip_text = true
+
+[node name="chk_9bits" type="CheckBox" parent="ui/expanel/settings"]
+layout_mode = 2
+button_pressed = true
+button_group = ExtResource("2_c1r55")
+text = "9 bits"
+
+[node name="chk_10bits" type="CheckBox" parent="ui/expanel/settings"]
+layout_mode = 2
+button_group = ExtResource("2_c1r55")
+text = "10 bits"
+
+[node name="chk_15bits" type="CheckBox" parent="ui/expanel/settings"]
+layout_mode = 2
+button_group = ExtResource("2_c1r55")
+text = "15 bits"
+
+[node name="spacer4" type="Control" parent="ui/expanel/settings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="chk_random_data" type="CheckBox" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Random data"
+
+[node name="spacer5" type="Control" parent="ui/expanel/settings"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="bt_back" type="Button" parent="ui/expanel/settings"]
+layout_mode = 2
+text = "Back"
+
+[node name="info" type="VBoxContainer" parent="ui/expanel"]
+visible = false
+clip_contents = true
+layout_mode = 2
+metadata/_page_name = "Info"
+
+[node name="lbl_basis_diff" type="Label" parent="ui/expanel/info"]
+layout_mode = 2
+text = "Basis difference:"
+
+[node name="lbl_basisdiff_x" type="Label" parent="ui/expanel/info"]
+layout_mode = 2
+
+[node name="lbl_basisdiff_y" type="Label" parent="ui/expanel/info"]
+layout_mode = 2
+
+[node name="lbl_basisdiff_z" type="Label" parent="ui/expanel/info"]
+layout_mode = 2
+
+[node name="spacer" type="Control" parent="ui/expanel/info"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="panel" type="Panel" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 224.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="hbox" type="HBoxContainer" parent="ui/panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 912.0
+offset_bottom = 39.0
+theme_override_constants/separation = 8
+metadata/_edit_group_ = true
+
+[node name="lbl_seed" type="Label" parent="ui/panel/hbox"]
+layout_mode = 2
+text = "Seed"
+vertical_alignment = 1
+
+[node name="sp_seed" type="SpinSlider" parent="ui/panel/hbox"]
+assign_minmax_on_right_click = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="bt_randomize" type="Button" parent="ui/panel/hbox"]
+layout_mode = 2
+text = "Randomize"
+
+[node name="spacer1" type="Control" parent="ui/panel/hbox"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="sp_bits" type="SpinSlider" parent="ui/panel/hbox"]
+suffix = "bits"
+assign_minmax_on_right_click = true
+range_use_min_value = true
+range_min_value = 4.0
+range_use_max_value = true
+range_max_value = 32.0
+value = 8.0
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+
+[node name="grid" type="GridContainer" parent="ui/panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="lbl_header1" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Original value"
+
+[node name="lbl_header2" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Quantized"
+
+[node name="lbl_header3" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Restored"
+
+[node name="lbl_header4" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Error"
+
+[node name="lbl_original1" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_quantized1" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_restored1" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_difference1" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_original2" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_quantized2" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_restored2" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_difference2" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_original3" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_quantized3" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_restored3" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_difference3" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc0" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc1" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc2" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc3" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_original4" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_quantized4" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_restored4" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_difference4" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc4" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc5" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc6" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="spacerc7" type="Control" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_original5" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_quantized5" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_restored5" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="lbl_difference5" type="Label" parent="ui/panel/grid"]
+layout_mode = 2
+
+[node name="scene" type="Node3D" parent="."]
+
+[node name="light" type="DirectionalLight3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 0.746441, 0.665452, 0, -0.665452, 0.746441, 0, 5.07754, 5.39044)
+
+[node name="cam" type="Camera3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 0.897912, 0.440174, 0, -0.440174, 0.897912, 0, 3.38406, 6.36376)
+
+[node name="source" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="cube" type="MeshInstance3D" parent="source"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = SubResource("BoxMesh_v2q1x")
+
+[node name="replicated" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="cube" type="MeshInstance3D" parent="replicated"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+mesh = SubResource("BoxMesh_3xdg4")
+
+[connection signal="value_changed" from="ui/expanel/settings/sl_pivyrotation" to="." method="_on_sl_pivyrotation_value_changed"]
+[connection signal="value_changed" from="ui/expanel/settings/sl_pivzrotation" to="." method="_on_sl_pivzrotation_value_changed"]
+[connection signal="value_changed" from="ui/expanel/settings/sl_cubexrotation" to="." method="_on_sl_cubexrotation_value_changed"]
+[connection signal="toggled" from="ui/expanel/settings/chk_9bits" to="." method="_on_chk_9_bits_toggled"]
+[connection signal="toggled" from="ui/expanel/settings/chk_10bits" to="." method="_on_chk_10_bits_toggled"]
+[connection signal="toggled" from="ui/expanel/settings/chk_15bits" to="." method="_on_chk_15_bits_toggled"]
+[connection signal="toggled" from="ui/expanel/settings/chk_random_data" to="." method="_on_chk_random_data_toggled"]
+[connection signal="pressed" from="ui/expanel/settings/bt_back" to="." method="_on_bt_back_pressed"]
+[connection signal="value_changed" from="ui/panel/hbox/sp_seed" to="." method="_on_sp_seed_value_changed"]
+[connection signal="pressed" from="ui/panel/hbox/bt_randomize" to="." method="_on_bt_randomize_pressed"]
+[connection signal="value_changed" from="ui/panel/hbox/sp_bits" to="." method="_on_sp_bits_value_changed"]

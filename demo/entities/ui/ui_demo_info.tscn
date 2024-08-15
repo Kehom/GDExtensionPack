@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://kfv4g0abr0lw"]
+
+[ext_resource type="Script" path="res://entities/ui/ui_demo_info.gd" id="1_1iwu5"]
+
+[node name="ui_demo_info" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+script = ExtResource("1_1iwu5")
+
+[node name="vbox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="lbl_title" type="Label" parent="vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
+[node name="lbl_description" type="Label" parent="vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+autowrap_mode = 2
+
+[node name="bt_load" type="Button" parent="vbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Open Demo"
+
+[connection signal="pressed" from="vbox/bt_load" to="." method="_on_bt_load_pressed"]

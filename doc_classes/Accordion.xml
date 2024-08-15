@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Accordion" inherits="Container" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		With name borrowed from web design UI, provides means to display extra content that can have its visibility toggled on or off by clicking a button.
+	</brief_description>
+	<description>
+		The `Accordion` is a Control borrowing something that is typically found on web development UIs. The idea of this Control is to provide "category buttons" that can toggle visibility of additional content placed bellow those buttons. Animation can be used to show/hide those contents. Curves can be used to control how those animations will play.
+		To create a category add an instance of [AccordionItem]
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="always_show_hscroll" type="bool" setter="set_always_show_hscroll" getter="get_always_show_hscroll" default="false">
+			If this is true then horizontal scroll bar will always be visible.
+		</member>
+		<member name="always_show_vscroll" type="bool" setter="set_always_show_vscroll" getter="get_always_show_vscroll" default="false">
+			If this is true then vertical scroll bar will always be visible.
+		</member>
+		<member name="animate_on_physics" type="bool" setter="set_animate_on_physics" getter="get_animate_on_physics" default="false">
+			Use _physics_process() to deal with animation instead of _process().
+		</member>
+		<member name="block_on_animation" type="bool" setter="set_anim_block" getter="get_anim_block" default="false">
+			If enabled toggle buttons will not react to events if an animation is in progress.
+		</member>
+		<member name="clip_contents" type="bool" setter="set_clip_contents" getter="is_clipping_contents" overrides="Control" default="true" />
+		<member name="exclusive" type="bool" setter="set_exclusive" getter="get_exclusive" default="false">
+			When true no more than a single AccordionItem can be active at a time.
+		</member>
+		<member name="hide_animation_curve" type="Curve" setter="set_hide_animation_curve" getter="get_hide_animation_curve">
+			This curve determines how the hide animation will behave.
+		</member>
+		<member name="hide_animation_time" type="float" setter="set_hide_animation_time" getter="get_hide_animation_time" default="0.3">
+			How long the hide animation will last, in seconds. Set to 0 to disable it.
+		</member>
+		<member name="icon_alignment" type="int" setter="set_icon_alignment" getter="get_icon_alignment" enum="HorizontalAlignment" default="2">
+			If icons are assigned into the toggle buttons, determine their horizontal alignments.
+		</member>
+		<member name="language" type="String" setter="set_language" getter="get_language" default="&quot;&quot;">
+			This is directly assigned into each category button's [member Button.language].
+		</member>
+		<member name="scroll_deadzone" type="int" setter="set_deadzone" getter="get_deadzone" default="0">
+			A dead zone used during touch scrolling. Smaller values make the scrolling more sensitive.
+		</member>
+		<member name="show_animation_curve" type="Curve" setter="set_show_animation_curve" getter="get_show_animation_curve">
+			This curve determines how the show animation will behave.
+		</member>
+		<member name="show_animation_time" type="float" setter="set_show_animation_time" getter="get_show_animation_time" default="0.3">
+			How long the show animation will last, in seconds. Set to 0 to disable it.
+		</member>
+		<member name="text_direction" type="int" setter="set_text_direction" getter="get_text_direction" enum="Control.TextDirection" default="0">
+			This is directly assigned into each category button's [member Button.text_direction].
+		</member>
+		<member name="title_alignment" type="int" setter="set_title_alignment" getter="get_title_alignment" enum="HorizontalAlignment" default="0">
+			Determines the horizontal alignments of the labels in the toggle buttons.
+		</member>
+	</members>
+	<signals>
+		<signal name="scroll_ended">
+			<description>
+				Emitted when scrolling ends, but only occurs by touch events.
+			</description>
+		</signal>
+		<signal name="scroll_started">
+			<description>
+				Emitted when scrolling starts, but only occurs by touch events.
+			</description>
+		</signal>
+	</signals>
+</class>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="FileDirPicker" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A wrapper control to allow picking a file or directory and display the selected value in a [i]LineEdit[/i].
+	</brief_description>
+	<description>
+		This basically wraps a [LineEdit], a [Button] and a [FileDialog]. The button is used to show the file dialog. The line edit displays the selected value.
+		This rather simple widget is probably useless in games, however this was created mainly to be used in tools.
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="access" type="int" setter="set_access" getter="get_access" enum="FileDialog.Access" default="0">
+			Direct access to [member FileDialog.access] property.
+		</member>
+		<member name="current_dir" type="String" setter="set_current_dir" getter="get_current_dir" default="&quot;res://&quot;">
+			Direct access to [member FileDialog.current_dir] property.
+		</member>
+		<member name="current_file" type="String" setter="set_current_file" getter="get_current_file" default="&quot;&quot;">
+			Direct access to [member FileDialog.current_file] property.
+		</member>
+		<member name="current_path" type="String" setter="set_current_path" getter="get_current_path" default="&quot;res://&quot;">
+			Direct access to [member FileDialog.current_path] property.
+		</member>
+		<member name="filters" type="PackedStringArray" setter="set_filters" getter="get_filters" default="PackedStringArray()">
+			Direct access to [member FileDialog.filters] property.
+		</member>
+		<member name="pick_mode" type="int" setter="set_pick_mode" getter="get_pick_mode" enum="FileDirPicker.PickMode" default="0">
+			Determines if the file dialog should be set to pick files ([constant PICK_MODE_FILE]) or directories ([constant PICK_MODE_DIRECTORY]).
+		</member>
+		<member name="root_subfolder" type="String" setter="set_root_subfolder" getter="get_root_subfolder" default="&quot;&quot;">
+			Direct access to [member FileDialog.root_subfolder] property.
+		</member>
+		<member name="show_hidden_files" type="bool" setter="set_show_hidden_files" getter="is_showing_hidden_files" default="false">
+			Direct access to [member FileDialog.show_hidden_files] property.
+		</member>
+	</members>
+	<signals>
+		<signal name="path_selected">
+			<param index="0" name="path" type="String" />
+			<description>
+				Emitted whenever a file/directory is selected through the wrapped file dialog.
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="PICK_MODE_FILE" value="0" enum="PickMode">
+			If this is assigned into [member pick_mode], then the file dialog will be set to select files rather than directories.
+		</constant>
+		<constant name="PICK_MODE_DIRECTORY" value="1" enum="PickMode">
+			If this is assigned into [member pick_mode], then the file dialog will be set to select directories rather than files.
+		</constant>
+	</constants>
+</class>

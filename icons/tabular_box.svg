@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-200,-24)">
+        <g id="node_colors">
+        </g>
+        <g id="music_note_8th">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d">
+        </g>
+        <g id="smooth_3d">
+        </g>
+        <g id="radial_impulse2d">
+        </g>
+        <g id="radial_impulse3d">
+        </g>
+        <g id="expandable_panel">
+        </g>
+        <g id="spin_slider">
+        </g>
+        <g id="zoom_in">
+        </g>
+        <g id="zoom_out">
+        </g>
+        <g id="zoom_reset">
+        </g>
+        <g id="grid_toggle">
+        </g>
+        <g id="snap_toggle">
+        </g>
+        <g id="checked">
+        </g>
+        <g id="updown">
+        </g>
+        <g id="scroll_up">
+        </g>
+        <g id="scroll_down">
+        </g>
+        <g id="scroll_right">
+        </g>
+        <g id="scroll_left">
+        </g>
+        <g id="accordion">
+        </g>
+        <g id="accordion_item">
+        </g>
+        <g id="audio_master">
+        </g>
+        <g id="tabular_box">
+            <g transform="matrix(3.5,0,0,1,-502.5,0)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(1.25,0,0,1,-50.25,3)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,109.5,3)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,112.5,3)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(1.25,0,0,1,-50.25,6)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,109.5,6)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,112.5,6)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(1.25,0,0,1,-50.25,9)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,109.5,9)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,112.5,9)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(1.25,0,0,1,-50.25,12)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,109.5,12)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,106.5,3)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,106.5,6)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,106.5,9)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,106.5,12)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(0.5,0,0,1,112.5,12)">
+                <rect x="201" y="25" width="4" height="2" style="fill:rgb(142,239,151);"/>
+            </g>
+        </g>
+    </g>
+</svg>

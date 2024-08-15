@@ -1,0 +1,243 @@
+[gd_scene load_steps=4 format=3 uid="uid://bioey8wjqbw2h"]
+
+[ext_resource type="Script" path="res://levels/entry.gd" id="1_x77gs"]
+[ext_resource type="ButtonGroup" uid="uid://cllj6hn5m8e8t" path="res://resources/button_groups/btgrp_entry_demos.tres" id="2_wt11n"]
+[ext_resource type="PackedScene" uid="uid://kfv4g0abr0lw" path="res://entities/ui/ui_demo_info.tscn" id="3_imktt"]
+
+[node name="entry" type="Node2D"]
+script = ExtResource("1_x77gs")
+
+[node name="ui" type="CanvasLayer" parent="."]
+
+[node name="vbox" type="VBoxContainer" parent="ui"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 256.0
+grow_vertical = 2
+
+[node name="margin1" type="MarginContainer" parent="ui/vbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="bt_info" type="Button" parent="ui/vbox/margin1"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_wt11n")
+text = "Addon Demos"
+
+[node name="accordion" type="Accordion" parent="ui/vbox"]
+hide_animation_time = 0.1
+show_animation_time = 0.1
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="debug_helpers" type="AccordionItem" parent="ui/vbox/accordion"]
+title = "Debug Helpers"
+active = true
+layout_mode = 2
+
+[node name="bt_overlayinfo" type="Button" parent="ui/vbox/accordion/debug_helpers"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "OverlayInfo & Line3D"
+
+[node name="general" type="AccordionItem" parent="ui/vbox/accordion"]
+title = "General"
+active = true
+layout_mode = 2
+
+[node name="bt_quantize" type="Button" parent="ui/vbox/accordion/general"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "Quantize"
+
+[node name="nodes" type="AccordionItem" parent="ui/vbox/accordion"]
+title = "Nodes"
+active = true
+layout_mode = 2
+
+[node name="bt_audiomaster" type="Button" parent="ui/vbox/accordion/nodes"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "AudioMaster"
+
+[node name="bt_rimpulse" type="Button" parent="ui/vbox/accordion/nodes"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "RadialImpulse"
+
+[node name="bt_smooth" type="Button" parent="ui/vbox/accordion/nodes"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "Smooth
+"
+
+[node name="ui" type="AccordionItem" parent="ui/vbox/accordion"]
+title = "UI"
+active = true
+layout_mode = 2
+
+[node name="bt_tabularbox" type="Button" parent="ui/vbox/accordion/ui"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_wt11n")
+text = "TabularBox"
+
+[node name="margin2" type="MarginContainer" parent="ui/vbox"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="bt_quit" type="Button" parent="ui/vbox/margin2"]
+layout_mode = 2
+text = "Quit"
+
+[node name="panel" type="Panel" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="info_main" parent="ui/panel" instance=ExtResource("3_imktt")]
+layout_mode = 1
+no_load = true
+title = "GDExtension Pack"
+description = "The aim of this project is to showcase the various plugins that are part of the Extension Pack.
+
+The plugins are roughly organized by category, which are shown on the left. Bellow each category button there are several other buttons, one for each specific demonstration. Clicking the \"plugin button\" should show a brief description of the demo scene as well as a button that, if clicked, will load the corresponding scene.
+
+Note that in the UI category not all available wigets resulted in a specific demo. The reason for that is that many of the custom controls are used throughout this project. As an example, the Accordion is shown on the left, holding the plugin categories! The ExpandablePanel is used pretty much in every single demo scene."
+
+[node name="dbghelpers" type="Control" parent="ui/panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ui_demo_info" parent="ui/panel/dbghelpers" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/debug_helpers/demo_overlay_line_3d.tscn"
+title = "OverlayInfo & Line3D"
+description = "In this demo both OverlayInfo and Line3D are showcased.
+
+The OverlayInfo offers means to add labels into the screen without having to worry about creating a UI layout specifically meant for it. Another feature is that it's possible to add \"timed labels\", which will disappear after the specified amount of seconds.
+
+The Line3D offers means to draw lines in 3D. A \"normal\" line will last a single frame. Yet it's possible to add a line that will last a specified amount of seconds."
+
+[node name="general" type="Control" parent="ui/panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="info_quantize" parent="ui/panel/general" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/general/demo_quantize.tscn"
+title = "Quantize"
+description = "Offers several functions to quantize floating point numbers into integers. This can be seen as a lossy compression.
+
+In this demo there are two cubes. One (the left one) serves as \"source\". Its orientation is then converted into a quaternion then compressed through one of the functions provided by the extension. It's then restored and applied into the second cube (the right one).
+
+There is a panel that can be expanded allowing to setup some things related to how the demo is run."
+
+[node name="nodes" type="Control" parent="ui/panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="info_audiomaster" parent="ui/panel/nodes" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/nodes/demo_audiomaster.tscn"
+title = "AudioMaster"
+description = "This extension provides the AudioMaster node, which manages pools of AudioStreamPlayer nodes. To be more specific, one pool for each configured Audio Bus within the project's default audio bus layout resource.
+
+The reason for this to exist is primarily to allow audio playback without having to worry about node lifetime. That is, if a node representing a pickup contains an AudioStream player, then it can only be destroyed after the playback has finished. If the audio playback is handled by the AudioMaster then there is no need to worry about when to destroy the pickup node.
+
+Easier acccess to the AudioMaster can be provided by either:
+1 - Adding it into an AutoLoad node (\"singleton\").
+2 - Using \"dependency injection\" into the nodes that require access to this.
+
+Some of the things that are shown in the demo:
+1 - Positional audio for both 2D and 3D
+2 - Music cross fading
+3 - Controlling music volume through the UI
+4 - Selecting output audio device"
+
+[node name="info_radimpulse" parent="ui/panel/nodes" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/nodes/demo_radimpulse.tscn"
+title = "RadialImpulse"
+description = "This extension adds (by default) two new nodes, RadialImpulse2D and RadialImpulse3D. The idea of the two nodes is to apply an impulse into all rigid bodies that are within the configured radius of RadialImpulse* node.
+
+In the demo both cases are shown. In the left (expandable) panel it's possible to choose between 2D and 3D modes, by selecting the corresponding radio button.
+
+In any case, moving the mouse around the area will also move the RadialImpulse, to the same position the mouse cursor is in. Using the scroll wheel will change the radius of the RadialImpulse. In the left panel it's possible to change the magnitude of the impulse as well as the type of falloff used. Left clicking in the main area will trigger the RadialImpulse's \"apply_impulse()\" function."
+
+[node name="info_smooth" parent="ui/panel/nodes" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/nodes/demo_smooth.tscn"
+title = "Smooth"
+description = "This plugin is largely based on work done by Lawnjelly. The differences to the original work are:
+
+- Each component of the transform (translation, orientation and scale) can be individually set to either fully interpolate, don't interpolate or completely ignore.
+- There is one Node that can be used both for 2D and 3D, depending on the target node, which can be chosen. This node will optionally interpolate its children and also an optional list that can be assigned within the editor.
+- All 3 nodes provided here use global transform which ensures correct behavior regardless of the hierarchy.
+
+This demo showcases all 3 nodes, both 2D and 3D. There is an expandable panel that holds settings related to the simulation."
+
+[node name="ui" type="Control" parent="ui/panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="info_tabularbox" parent="ui/panel/ui" instance=ExtResource("3_imktt")]
+visible = false
+layout_mode = 1
+scene = "res://levels/ui/demo_tabularbox.tscn"
+title = "TabularBox"
+description = "This widget allows viewing and editing data through columns and rows. Data source resources (TabularDataSource) are used to \"bridge\" the actual data and the UI display.
+
+In this demo a custom data source (res://scripts/custom_data_source.gd) is implemented which also uses a custom cell (res://scripts/tboxcelldropdown.gd).
+
+An important thing to note here is that if the data source resource is changed and saved during the test, the corresponding scene must be reloaded in editor in order to update the display."
+
+[connection signal="toggled" from="ui/vbox/margin1/bt_info" to="." method="_on_bt_info_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/debug_helpers/bt_overlayinfo" to="." method="_on_bt_overlayinfo_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/general/bt_quantize" to="." method="_on_bt_quantize_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/nodes/bt_audiomaster" to="." method="_on_bt_audiomaster_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/nodes/bt_rimpulse" to="." method="_on_bt_rimpulse_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/nodes/bt_smooth" to="." method="_on_bt_smooth_toggled"]
+[connection signal="toggled" from="ui/vbox/accordion/ui/bt_tabularbox" to="." method="_on_bt_tabularbox_toggled"]
+[connection signal="pressed" from="ui/vbox/margin2/bt_quit" to="." method="_on_bt_quit_pressed"]

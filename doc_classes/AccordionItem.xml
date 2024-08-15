@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="AccordionItem" inherits="Container" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		A node that creates a category in an [Accordion] parent.
+	</brief_description>
+	<description>
+		This generates a "category" in its [Accordion] parent. That is, it creates a "toggle button" that can be used to show or hide any contents added into this Item.
+		This control behaves very similarly to the [VBoxContainer], where each child uses all available width, however the height is determined by the value returned from [code]get_minimum_size().y[/code].
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="active" type="bool" setter="set_active" getter="get_active" default="false">
+			Setting this to [code]true[/code] means the contents should be shown.
+		</member>
+		<member name="button_tooltip" type="String" setter="set_button_tooltip" getter="get_button_tooltip" default="&quot;&quot;">
+			Assign a tooltip text into the toggle button.
+		</member>
+		<member name="clip_contents" type="bool" setter="set_clip_contents" getter="is_clipping_contents" overrides="Control" default="true" />
+		<member name="enabled" type="bool" setter="set_enabled" getter="get_enabled" default="true">
+			Allows the toggle button to be disabled.
+		</member>
+		<member name="icon" type="Texture2D" setter="set_icon" getter="get_icon">
+			Allows an icon to be assigned into the toggle button.
+		</member>
+		<member name="mouse_filter" type="int" setter="set_mouse_filter" getter="get_mouse_filter" overrides="Control" enum="Control.MouseFilter" default="2" />
+		<member name="title" type="String" setter="set_title" getter="get_title" default="&quot;&quot;">
+			Assigned as the text of the toggle button.
+		</member>
+	</members>
+	<signals>
+		<signal name="active_changed">
+			<param index="0" name="active" type="bool" />
+			<description>
+				Emitted whenever the [member active] state is changed. The argument tells if it's now on or off.
+			</description>
+		</signal>
+		<signal name="hide_animation_ended">
+			<description>
+				Emitted whenever the hide animation finishes.
+			</description>
+		</signal>
+		<signal name="hide_animation_started">
+			<description>
+				Emitted whenever the hide animation starts.
+			</description>
+		</signal>
+		<signal name="show_animation_ended">
+			<description>
+				Emitted whenever the show animation finishes.
+			</description>
+		</signal>
+		<signal name="show_animation_started">
+			<description>
+				Emitted whenever the show animation starts.
+			</description>
+		</signal>
+	</signals>
+</class>

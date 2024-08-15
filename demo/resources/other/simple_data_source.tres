@@ -1,0 +1,47 @@
+[gd_resource type="TabularDataSourceSimple" format=3]
+
+[resource]
+column_list = [{
+"title": "A",
+"type": 0
+}, {
+"title": "B",
+"type": 1
+}, {
+"title": "Testing",
+"type": 0
+}, {
+"title": "D",
+"type": 0
+}]
+row_list = [{
+"A": "",
+"B": true,
+"D": "",
+"Testing": "yes"
+}, {
+"A": "",
+"B": false,
+"D": "",
+"Testing": "no"
+}, {
+"A": "",
+"B": false,
+"D": "",
+"Testing": ""
+}, {
+"A": "",
+"B": false,
+"D": "",
+"Testing": ""
+}, {
+"A": "",
+"B": false,
+"D": "",
+"Testing": ""
+}, {
+"A": "",
+"B": false,
+"D": "",
+"Testing": ""
+}]

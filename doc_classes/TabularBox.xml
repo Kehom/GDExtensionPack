@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TabularBox" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Allows viewing and editing data in tables.
+	</brief_description>
+	<description>
+	</description>
+	<tutorials>
+	</tutorials>
+	<members>
+		<member name="allow_context_menu" type="bool" setter="set_allow_context_menu" getter="get_allow_context_menu" default="true">
+			If set to [code]false[/code] then right clicking the widget will not popup a context menu.
+		</member>
+		<member name="auto_edit_next_row_mode" type="int" setter="set_edit_next_cell_mode" getter="get_edit_next_cell_mode" enum="TabularBox.NextCellMode" default="1">
+			When dealing with cells that can grab keyboard focus, pressing enter will commit the value. This property determines if another cell will be selected potentially grabbing keyboard focus.
+		</member>
+		<member name="auto_handle_column_insertion" type="bool" setter="set_auto_handle_column_insertion" getter="get_auto_handle_column_insertion" default="true">
+			If this is [code]true[/code] this widget will automatically handle column insertion directly within the assigned [member data_source]. Otherwise attempting to insert a column will trigger the [signal insert_column_requested].
+		</member>
+		<member name="auto_handle_column_move" type="bool" setter="set_auto_handle_column_move" getter="get_auto_handle_column_move" default="true">
+			If this is [code]true[/code] this widget will automatically handle column reordering directly within the assigned [member data_source]. Otherwise attempting to move a column will trigger the [signal column_move_requested].
+		</member>
+		<member name="auto_handle_column_rename" type="bool" setter="set_auto_handle_column_rename" getter="get_auto_handle_column_rename" default="true">
+			If this is [code]true[/code] this widget will automatically handle column rename within the assigned [member data_source]. Otherwise attempting to change a column's name will trigger the [signal column_rename_requested].
+		</member>
+		<member name="auto_handle_column_type_change" type="bool" setter="set_auto_handle_column_type_change" getter="get_auto_handle_column_type_change" default="true">
+			If this is [code]true[/code] then this widget will automatically handle column value type change within the assigned [member data_source]. Otherwise attempting to change the value type of a column will trigger the [signal column_type_change_requested].
+		</member>
+		<member name="auto_handle_remove_column" type="bool" setter="set_auto_handle_remove_column" getter="get_auto_handle_remove_column" default="true">
+			If this is [code]true[/code] then this widget will automatically handle column removal directly within the assigned [member data_source]. Otherwise attempting to remove a column will trigger the [signal column_remove_requested].
+		</member>
+		<member name="auto_handle_remove_row" type="bool" setter="set_auto_handle_remove_row" getter="get_auto_handle_remove_row" default="true">
+			If this is [code]true[/code] then this widget will automatically handle row removal directly within the assigned [member data_source]. Otherwise attempting to remove a row will trigger the [signal row_remove_requested].
+		</member>
+		<member name="auto_handle_row_insertion" type="bool" setter="set_auto_handle_row_insertion" getter="get_auto_handle_row_insertion" default="true">
+			If this is [code]true[/code] then this widget will automatically handle row insertion within the assigned [member data_source]. Otherwise attempting to insert a row will trigger the [signal insert_row_requested].
+		</member>
+		<member name="auto_handle_row_move" type="bool" setter="set_auto_handle_row_move" getter="get_auto_handle_row_move" default="true">
+			If this is [code]true[/code] then this widget will automatically handle row reordering directly within the assigned [member data_source]. Otherwise attempting to move a row will trigger the [signal row_move_requested].
+		</member>
+		<member name="auto_handle_row_sort" type="bool" setter="set_auto_handle_row_sort" getter="get_auto_handle_row_sort" default="true">
+			If this is [code]true[/code] then this widget will automatically handle row sorting directly within the assigned [member data_source]. Otherwise attempting to sort rows will trigger the [signal row_sort_requested].
+		</member>
+		<member name="autohide_h_scrollbar" type="bool" setter="set_autohide_h_scrollbar" getter="get_autohide_h_scrollbar" default="true">
+			If this is [code]false[/code] then the horizontal scroll bar will always be visible.
+		</member>
+		<member name="autohide_v_scrollbar" type="bool" setter="set_autohide_v_scrollbar" getter="get_autohide_v_scrollbar" default="true">
+			If this is [code]false[/code] then the vertical scroll bar will always be visible.
+		</member>
+		<member name="autosave_source" type="bool" setter="set_autosave_source" getter="get_autosave_source" default="true">
+			If [code]true[/code] then the [method TabularDataSource.save] will be automatically called whenever a change occurs.
+			Please note that if a data source is changed (and saved) while testing, reloading the project in editor might result in some error or warning messages related to the data source file. Those can be ignored.
+		</member>
+		<member name="data_source" type="TabularDataSource" setter="set_data_source" getter="get_data_source">
+			This resource is what provides the data and determines how it should be shown within this widget.
+		</member>
+		<member name="row_numbers_alignment" type="int" setter="set_row_numbers_alignment" getter="get_row_numbers_alignment" enum="HorizontalAlignment" default="2">
+			Horizontal alignment of the row numbers that are in the left side of the box if [member show_row_numbers] is true.
+		</member>
+		<member name="show_row_checkboxes" type="bool" setter="set_show_row_checkboxes" getter="get_show_row_checkboxes" default="true">
+			If [code]true[/code] then checkboxes will be added into each row, allowing row selection to occur.
+		</member>
+		<member name="show_row_numbers" type="bool" setter="set_show_row_numbers" getter="get_show_row_numbers" default="true">
+			If [code]true[/code] then each row will have its "number" (count) shown in the left side of the box.
+		</member>
+		<member name="title_horizontal_alignment" type="int" setter="set_title_horizontal_alignment" getter="get_title_horizontal_alignment" enum="HorizontalAlignment" default="0">
+			Determines the horizontal alignment of the column titles.
+		</member>
+	</members>
+	<signals>
+		<signal name="column_move_requested">
+			<param index="0" name="from_index" type="int" />
+			<param index="1" name="to_index" type="int" />
+			<description>
+				Emitted when attempting to reorder a column when [member auto_handle_column_move] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="column_remove_requested">
+			<param index="0" name="column_index" type="int" />
+			<description>
+				Emitted when attempting to remove a column when [member auto_handle_remove_column] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="column_rename_requested">
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="new_title" type="String" />
+			<description>
+				Emitted when attempting rename a column when [member auto_handle_column_rename] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="column_resized">
+			<param index="0" name="column_title" type="String" />
+			<param index="1" name="new_width" type="int" />
+			<description>
+				Emitted when the width of a column is changed.
+			</description>
+		</signal>
+		<signal name="column_type_change_requested">
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="to_type" type="int" />
+			<description>
+				Emitted when attempting to change the value type of a column when [member auto_handle_column_type_change] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="insert_column_requested">
+			<param index="0" name="at_index" type="int" />
+			<description>
+				Emitted when attempting to insert a column when [member auto_handle_column_insertion] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="insert_row_requested">
+			<param index="0" name="at_index" type="int" />
+			<description>
+				Emitted when attempting to insert a row when [member auto_handle_row_insertion] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="row_move_requested">
+			<param index="0" name="from_index" type="int" />
+			<param index="1" name="to_index" type="int" />
+			<description>
+				Emitted when attempting to reorder a row when [member auto_handle_row_move] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="row_remove_requested">
+			<param index="0" name="index_list" type="Array" />
+			<description>
+				Emitted when attempting to remove row(s) when [member auto_handle_remove_row] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="row_sort_requested">
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="ascending" type="bool" />
+			<description>
+				Emitted when attempting to sort rows when [member auto_handle_row_sort] is [code]false[/code].
+			</description>
+		</signal>
+		<signal name="value_change_requested">
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="row_index" type="int" />
+			<param index="2" name="value" type="Variant" />
+			<description>
+				Emitted when attempting to change the value of a cell when the corresponding column has the [constant TabularDataSource.ValueChangeSignal] flag set.
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="NCM_Disabled" value="0" enum="NextCellMode">
+			Do not select another cell when committing value change through [i]enter key[/i].
+		</constant>
+		<constant name="NCM_Row" value="1" enum="NextCellMode">
+			Select the cell in the row bellow. If currently in the last row, then select the first cell of the next column.
+		</constant>
+		<constant name="NCM_Column" value="2" enum="NextCellMode">
+			Select the cell in the column to the right. IF this is the last cell in the row, select the first cell in the first column of the next row.
+		</constant>
+	</constants>
+</class>

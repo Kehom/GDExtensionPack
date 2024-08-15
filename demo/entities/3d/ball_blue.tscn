@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://calx5yxo7xmeg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8bjgo"]
+friction = 0.4
+bounce = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1by75"]
+albedo_color = Color(0.25098, 0.219608, 0.588235, 1)
+roughness = 0.2
+clearcoat_roughness = 0.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_transmittance_color = Color(1, 0, 0.2, 1)
+subsurf_scatter_transmittance_depth = 2.829
+subsurf_scatter_transmittance_boost = 1.0
+refraction_scale = -0.32
+
+[sub_resource type="SphereMesh" id="SphereMesh_7qrtb"]
+material = SubResource("StandardMaterial3D_1by75")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i6u21"]
+
+[node name="ball1" type="RigidBody3D"]
+mass = 5.0
+physics_material_override = SubResource("PhysicsMaterial_8bjgo")
+metadata/_edit_group_ = true
+
+[node name="visual" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_7qrtb")
+
+[node name="shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_i6u21")

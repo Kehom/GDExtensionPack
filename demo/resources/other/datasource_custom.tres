@@ -1,0 +1,55 @@
+[gd_resource type="TabularDataSource" script_class="TabularDataSourceCustom" load_steps=2 format=3 uid="uid://cdlhtu4w835pm"]
+
+[ext_resource type="Script" path="res://scripts/custom_data_source.gd" id="1_703tr"]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_703tr")
+column_list = Array[Dictionary]([{
+"title": "ID",
+"type": 0
+}, {
+"title": "enabled",
+"type": 1
+}, {
+"title": "dmg_type",
+"type": 6
+}])
+row_list = Array[Dictionary]([{
+"ID": "spell_01",
+"dmg_type": 2,
+"enabled": true
+}, {
+"ID": "spell_02",
+"dmg_type": 3,
+"enabled": true
+}, {
+"ID": "spell_03",
+"dmg_type": 1,
+"enabled": false
+}, {
+"ID": "spell_04",
+"dmg_type": 4,
+"enabled": true
+}, {
+"ID": "spell_05",
+"dmg_type": 5,
+"enabled": true
+}, {
+"ID": "spell_06",
+"dmg_type": 2,
+"enabled": false
+}, {
+"ID": "spell_07",
+"dmg_type": 3,
+"enabled": false
+}, {
+"ID": "spell_08",
+"dmg_type": 5,
+"enabled": false
+}, {
+"ID": "spell_09",
+"dmg_type": 1,
+"enabled": true
+}])

@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TabularDataSource" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Provides data and determines how it should be shown in the [TabularBox] control.
+	</brief_description>
+	<description>
+		This resource is meant to serve as a "bridge" between the actual stored data and the [TabularBox] UI.
+		Besides "telling" the owning control what data is stored, this also specify [i]how[/i] that data must shown.
+		Several functions must be implemented (overridden) so the owning box can properly work.
+		In here, "value type code" is just a way to identify a value types and is completely arbitrary. In other words, how the types are identified is completely up to the implementation of the data source.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_change_column_value_type" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="new_type" type="int" />
+			<description>
+				This will be called when requesting to change the value type of a column. The [param index] tell the index of the column while [param new_type] is the code identification of the new type.
+				The implementation must convert any stored data from current type into the new one.
+				If you intend to use code to change the column value type, call [method change_column_value_type] instead of this function.
+			</description>
+		</method>
+		<method name="_dump_data" qualifiers="virtual const">
+			<return type="void" />
+			<description>
+				Optional function which is actually not called by the tabular box. This is a debugging artifact. That said, this can be used to dump internal data for debugging purposes.
+			</description>
+		</method>
+		<method name="_get_column_count" qualifiers="virtual const">
+			<return type="int" />
+			<description>
+				Must return how many columns are currently in the data source.
+			</description>
+		</method>
+		<method name="_get_column_info" qualifiers="virtual const">
+			<return type="Dictionary" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Given the [member index] of a column, this function must return a dictionary containing information corresponding to that column. Except for the column title, all entries are optional and if not provided a default value will be used. The expected entries are:
+				- [code]title[/code] ([i]String[/i]): The title of the column
+				- [code]cell_class[/code] ([i]String[/i]): Name of the class implementing the cell meant to show/edit the data in the column. Defaults to [code]"TabularBoxCellString"[/code].
+				- [code]flags[/code] ([i]integer[/i]): A combination of flags from the [enum ColumnFlags]. Defaults to [code]AllowTitleEdit | AllowMenu | AllowResize | AllowTypeChange | AllowSorting | AllowMove[/code].
+				- [code]move_bt_move[/code] ([i]integer[/i]): An option from [enum MoveColumnButtons]. Defaults to [code]AlwaysVisible[/code].
+				- [code]extra_settings[/code] ([i]Dictionary[/i]): Additional settings that will be relayed to each cell in this column when it gets instantiated.
+			</description>
+		</method>
+		<method name="_get_row" qualifiers="virtual const">
+			<return type="Dictionary" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Given a row [param index], the implementation of this function must return the values of that row in a dictionary. The keys must be the titles of the corresponding columns.
+			</description>
+		</method>
+		<method name="_get_row_count" qualifiers="virtual const">
+			<return type="int" />
+			<description>
+				The implementation of this function must return the amount of columns stored in the data source.
+			</description>
+		</method>
+		<method name="_get_type_list" qualifiers="virtual const">
+			<return type="Dictionary" />
+			<description>
+				This must return a dictionary containing the list of value types handled by the data source. More specifically, each entry's key must be the value type identification code (integer) with the value being a string with the name of the that type. This string will be used in the UI.
+			</description>
+		</method>
+		<method name="_get_value" qualifiers="virtual const">
+			<return type="Variant" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="row_index" type="int" />
+			<description>
+				This must return the value of a single cell, given its column and row indices, [param column_index] and [param row_index] respectively.
+			</description>
+		</method>
+		<method name="_has_column" qualifiers="virtual const">
+			<return type="bool" />
+			<param index="0" name="title" type="String" />
+			<description>
+				Given [param title], this function must return true if it corresponds to a column title that exists in the data source.
+			</description>
+		</method>
+		<method name="_insert_column" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="title" type="String" />
+			<param index="1" name="type" type="int" />
+			<param index="2" name="index" type="int" />
+			<param index="3" name="info" type="Dictionary" />
+			<param index="4" name="extra" type="Dictionary" />
+			<description>
+				The implementation of this function must insert a new column titled [param title] meant to hold value sof type [param type]. The [param index] is used to ensure the column order once the new one is added. The implementation must be able to deal with incoming [code]index = -1[/code], which the tabular box will frequently use when requesting to append the new column.
+				The [param info] and [param extra] will always be empty when this function is directly called by the tabular box and they exist primarily to provide additional data when creating columns through code. The idea here is that [code]info[/code] is used to provide data specifically meant to build the column itself, while the [code]extra[/code] is meant to provide data to be relayed into the cells of the column.
+			</description>
+		</method>
+		<method name="_insert_row" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="values" type="Dictionary" />
+			<param index="1" name="index" type="int" />
+			<description>
+				This function must insert the incoming row data [param values] into the specified [param index].
+				The implementation must be able to deal with incoming empty [param values] dictionary. 
+				Also if [param index] is negative then it's expected the implementation to append the row.
+			</description>
+		</method>
+		<method name="_move_column" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				This function is used to reorder columns and the implementation must move the column currently at [param from] into [param to] index.
+			</description>
+		</method>
+		<method name="_move_row" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				This function is used to reorder rows and the implementation must move the row currently at [param from] into [param to] index.
+			</description>
+		</method>
+		<method name="_remove_column" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				This is called to remove the column that is at [param index].
+			</description>
+		</method>
+		<method name="_remove_row" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				This is called to remove the row that is at [param index].
+			</description>
+		</method>
+		<method name="_rename_column" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="new_title" type="String" />
+			<description>
+				The implementation must change the title of the column at [param index] into [param new_title].
+			</description>
+		</method>
+		<method name="_set_value" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="row_index" type="int" />
+			<param index="2" name="value" type="Variant" />
+			<description>
+				Implementation must assign [param value] as the value of a single cell, at [param column_index] and [param row_index] column and row indices, respectively.
+			</description>
+		</method>
+		<method name="_sort_by_column" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="ascending" type="bool" />
+			<description>
+				Given [param column_index], this function must sort the rows by that column. The [param ascending] is used to specify the final order.
+			</description>
+		</method>
+		<method name="change_column_value_type">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="new_type" type="int" />
+			<description>
+				Call this function if you intend to change column value type through code, providing column [param index] and the new type code [param new_type].
+			</description>
+		</method>
+		<method name="clear_filter">
+			<return type="void" />
+			<description>
+				Clear row filtering that was previously set by [method set_filter].
+			</description>
+		</method>
+		<method name="dump_data" qualifiers="const">
+			<return type="void" />
+			<description>
+				Relays the call to the virtual function. If you want to "dump data" through code, call this function instead of [method _dump_data].
+			</description>
+		</method>
+		<method name="get_column_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				If you intend to retrieve amount of columns through code, use this function, which will then relay the call to the [method _get_column_count].
+			</description>
+		</method>
+		<method name="get_column_info" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="index" type="int" />
+			<description>
+				If you want to retrieve column information through code, use this function, which will then relay the call to the [method _get_column_info].
+			</description>
+		</method>
+		<method name="get_row" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="row_index" type="int" />
+			<description>
+				If you want to retrieve a row through code, use this function, which will then relay the call to the [method _get_row].
+			</description>
+		</method>
+		<method name="get_row_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				If you want to query amount of rows in the data source through code use this function, which will then relay the call to [method _get_row_count].
+			</description>
+		</method>
+		<method name="get_value" qualifiers="const">
+			<return type="Variant" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="row_index" type="int" />
+			<description>
+				If you want to retrieve the value of a single cell through code use this function, which will then relay the call to [method _get_value].
+			</description>
+		</method>
+		<method name="has_column" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="title" type="String" />
+			<description>
+				If you want to query if a column exists in the data source through code use this function, which will then relay the call to the [method _has_column].
+			</description>
+		</method>
+		<method name="insert_column">
+			<return type="void" />
+			<param index="0" name="title" type="String" />
+			<param index="1" name="type" type="int" />
+			<param index="2" name="index" type="int" />
+			<param index="3" name="info" type="Dictionary" default="{}" />
+			<param index="4" name="extra" type="Dictionary" default="{}" />
+			<description>
+				If you want to insert a column in the data source through code use this function, which will then relay the call to the [method _insert_column].
+			</description>
+		</method>
+		<method name="insert_row">
+			<return type="void" />
+			<param index="0" name="values" type="Dictionary" />
+			<param index="1" name="index" type="int" default="-1" />
+			<description>
+				If you want to insert a row into the data source through code use this function, which will then relay the call to the [method _insert_row].
+			</description>
+		</method>
+		<method name="is_filtered" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="row_index" type="int" />
+			<description>
+				Returns true if the data source is currently filtering data, previously set by [method set_filter].
+			</description>
+		</method>
+		<method name="is_filtering" qualifiers="const">
+			<return type="bool" />
+			<description>
+				This function returns true if the a filter is being processed. This information might be useful depending on the data source implementation. Only useful when used within the [method _get_row], which is called to match the filter [i]keyword[/i].
+			</description>
+		</method>
+		<method name="move_column">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				If you want to reorder column in the data source through code use this function, which will then relay the call to the [method _move_column].
+			</description>
+		</method>
+		<method name="move_row">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				If you want to reorder row in the data source through code use this function, which will then relay the call to the [method _move_row].
+			</description>
+		</method>
+		<method name="notify_column_moved">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				When a column is reordered in the data source, call this function to notify the tabular box about the change.
+			</description>
+		</method>
+		<method name="notify_column_removed">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When a column is removed from the data source, call this function to notify the tabular box about the change.
+			</description>
+		</method>
+		<method name="notify_column_rename_rejected">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When attempting to rename a column, if it's not allowed call this function to notify the tabular box about the "rejection".
+			</description>
+		</method>
+		<method name="notify_column_renamed">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When a column title has been changed call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="notify_new_column">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When a new column has been added into the data source call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="notify_new_row">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When a new row has been added into the data source call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="notify_row_moved">
+			<return type="void" />
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				When a row has been reordered call this function to notify the tabular box about the change.
+			</description>
+		</method>
+		<method name="notify_row_removed">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				When a row has been removed from the data source call this function to notify the tabular box about the change.
+			</description>
+		</method>
+		<method name="notify_sorted">
+			<return type="void" />
+			<param index="0" name="_unnamed_arg0" type="int" />
+			<description>
+				When rows have been sorted call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="notify_type_changed">
+			<return type="void" />
+			<param index="0" name="column" type="int" />
+			<description>
+				When a column value type has been changed, call this function to notify the tabular box about the change.
+			</description>
+		</method>
+		<method name="notify_value_change_rejected">
+			<return type="void" />
+			<param index="0" name="column" type="int" />
+			<param index="1" name="row" type="int" />
+			<description>
+				When attempting to change the value of a cell, if it's not allowed call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="notify_value_changed">
+			<return type="void" />
+			<param index="0" name="column" type="int" />
+			<param index="1" name="row" type="int" />
+			<param index="2" name="new_value" type="Variant" />
+			<description>
+				When the value of a cell has been changed, call this function to notify the tabular box.
+			</description>
+		</method>
+		<method name="remove_column">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				If you want to remove a column from the data source through code call this function, which will then relay the call to the [method _remove_column].
+			</description>
+		</method>
+		<method name="remove_row">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<description>
+				If you want to remove a row from the data source through code call this function, which will then relay the call to the [method _remove_row].
+			</description>
+		</method>
+		<method name="rename_column">
+			<return type="void" />
+			<param index="0" name="index" type="int" />
+			<param index="1" name="new_title" type="String" />
+			<description>
+				If you want to rename a column through code call this function, which will then relay the call to the [method _rename_column].
+			</description>
+		</method>
+		<method name="set_filter">
+			<return type="void" />
+			<param index="0" name="keyword" type="String" />
+			<param index="1" name="case_sensitive" type="bool" />
+			<param index="2" name="exclude_columns" type="PackedStringArray" default="PackedStringArray()" />
+			<description>
+				Hides all rows that don't contain [param keyword]. Case sensitivity can be controlled by [param case_sensitive]. Columns can be ignored skipped when comparing values by adding the titles into the [exclude_columns] array.
+			</description>
+		</method>
+		<method name="set_filter_regex">
+			<return type="void" />
+			<param index="0" name="expression" type="String" />
+			<param index="1" name="exclude_columns" type="PackedStringArray" default="PackedStringArray()" />
+			<description>
+				Use [param expression] to build a [RegEx] object and apply that as search criteria. Rows that don't match will not be shown. Columns can be excluded from the search by adding the titles into the [param exclude_columns] array.
+			</description>
+		</method>
+		<method name="set_value">
+			<return type="void" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="row_index" type="int" />
+			<param index="2" name="value" type="Variant" />
+			<description>
+				If you want to set the value of a single cell through code use this function, which will then relay the call to the [method _set_value].
+			</description>
+		</method>
+		<method name="sort_by_column">
+			<return type="void" />
+			<param index="0" name="column_index" type="int" />
+			<param index="1" name="ascending" type="bool" />
+			<description>
+				If you want to request row sorting by code use this function, which will the relay the call to the [method _sort_by_column].
+			</description>
+		</method>
+	</methods>
+	<signals>
+		<signal name="column_inserted">
+			<param index="0" name="at_index" type="int" />
+			<description>
+				This signal will be triggered after calling [method notify_new_column].
+			</description>
+		</signal>
+		<signal name="column_moved">
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				Will be triggered after calling [method notify_column_moved].
+			</description>
+		</signal>
+		<signal name="column_removed">
+			<param index="0" name="index" type="int" />
+			<description>
+				Will be triggered after calling [method notify_column_removed].
+			</description>
+		</signal>
+		<signal name="column_rename_rejected">
+			<param index="0" name="index" type="int" />
+			<description>
+				Will be triggered after calling [method notify_column_rename_rejected].
+			</description>
+		</signal>
+		<signal name="column_renamed">
+			<param index="0" name="index" type="int" />
+			<description>
+				Will be triggered after calling [method notify_column_renamed].
+			</description>
+		</signal>
+		<signal name="data_sorting_changed">
+			<param index="0" name="column" type="int" />
+			<description>
+				Will be triggered after calling [method notify_sorted].
+			</description>
+		</signal>
+		<signal name="filter_changed">
+			<description>
+				Will be triggered after the filter has been changed through [method set_filter], [method set_filter_regex] or [method clear_filter].
+			</description>
+		</signal>
+		<signal name="row_inserted">
+			<param index="0" name="at_index" type="int" />
+			<description>
+				Will be triggered after calling [method notify_new_row].
+			</description>
+		</signal>
+		<signal name="row_moved">
+			<param index="0" name="from" type="int" />
+			<param index="1" name="to" type="int" />
+			<description>
+				Will be triggered after calling [method notify_row_moved].
+			</description>
+		</signal>
+		<signal name="row_removed">
+			<param index="0" name="index" type="int" />
+			<description>
+				Will be triggered after calling [method notify_row_removed].
+			</description>
+		</signal>
+		<signal name="type_changed">
+			<param index="0" name="column" type="int" />
+			<description>
+				Will be triggered after calling [method notify_type_changed].
+			</description>
+		</signal>
+		<signal name="value_change_rejected">
+			<param index="0" name="column" type="int" />
+			<param index="1" name="row" type="int" />
+			<description>
+				Will be triggered after calling [method notify_value_change_rejected].
+			</description>
+		</signal>
+		<signal name="value_changed">
+			<param index="0" name="column" type="int" />
+			<param index="1" name="row" type="int" />
+			<param index="2" name="new_value" type="Variant" />
+			<description>
+				Will be triggered after calling [method notify_value_changed].
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="AllowTitleEdit" value="1" enum="ColumnFlags">
+			When this flag is not added then the tabular box will set the column title's input box as read only.
+		</constant>
+		<constant name="AllowMenu" value="2" enum="ColumnFlags">
+			When this flag is not set then context menu specific to the column will not be shown.
+		</constant>
+		<constant name="AllowResize" value="4" enum="ColumnFlags">
+			When this flag is not set then the width of the column will not be changeable.
+		</constant>
+		<constant name="AllowTypeChange" value="16" enum="ColumnFlags">
+			When this flag is not set then value type of the column cannot be changed, excluding the relevant option from the context menu.
+		</constant>
+		<constant name="AllowSorting" value="32" enum="ColumnFlags">
+			If this flag is not set then the sorting option in the context menu will be excluded.
+		</constant>
+		<constant name="AllowMove" value="64" enum="ColumnFlags">
+			If this flag is set then the buttons to reorder the column wont be shown.
+		</constant>
+		<constant name="ValueChangeSignal" value="1024" enum="ColumnFlags">
+			When this flag is set, the tabular box will emit a signal instead of attempting to directly change the value within the data source.
+		</constant>
+		<constant name="AlwaysVisible" value="0" enum="MoveColumnButtons">
+			If set to this value then the buttons at the column title will always be shown, provided the [constant AllowMove] is set in the column flags.
+		</constant>
+		<constant name="ShowOnMouseOver" value="1" enum="MoveColumnButtons">
+			If set to this value then the buttons at the column title will only be shown when the mouse is over the [i]header[/i] area, provided the [constant AllowMove] is set in the column flags.
+		</constant>
+		<constant name="AlwaysHidden" value="2" enum="MoveColumnButtons">
+			If set to this value then the buttons at the column title will not be shown, regardless of the [constant AllowMove] column flag.
+		</constant>
+	</constants>
+</class>

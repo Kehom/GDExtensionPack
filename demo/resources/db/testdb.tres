@@ -1,0 +1,197 @@
+[gd_resource type="GDDatabase" load_steps=7 format=3 uid="uid://c2wt1r57ch7rt"]
+
+[ext_resource type="DBTable" uid="uid://bm3d7adr32l1d" path="res://resources/db/testdb_outertable.tres" id="1_4do3w"]
+
+[sub_resource type="DBTable" id="DBTable_lp64u"]
+table_id = "3cmcfmjqe2v2"
+table_name = &"arrays"
+id_type = 4
+locked_row_id = true
+column = [{
+"title": "str",
+"value_type": 1500
+}, {
+"title": "int",
+"value_type": 1501
+}, {
+"title": "float",
+"value_type": 1502
+}, {
+"title": "tex",
+"value_type": 1503
+}, {
+"title": "audio",
+"value_type": 1504
+}, {
+"title": "color",
+"value_type": 1506
+}]
+row_list = [{
+"audio": PackedStringArray("res://resources/sfx/impactmining_000.wav", "res://resources/sfx/impactmining_004.wav"),
+"color": PackedColorArray(0.65625, 0.0845947, 0.0845947, 1, 0.157303, 0.294802, 0.660156, 1),
+"float": PackedFloat64Array(1.2, 3.2),
+"id": "b01akn44cbxn7agq",
+"int": PackedInt64Array(42, 30),
+"str": PackedStringArray("line 1", "line2"),
+"tex": PackedStringArray("res://resources/textures/checker_2048x2048.png", "res://resources/textures/sprites/manbrown_stand.png")
+}, {
+"audio": PackedStringArray("res://resources/sfx/rollover2.wav"),
+"color": PackedColorArray(0.0852966, 0.839844, 0.220879, 1, 0.75, 0.637871, 0.125977, 1),
+"float": PackedFloat64Array(4.2, 3),
+"id": "6aklfllmqcz7zm2r",
+"int": PackedInt64Array(4, 2),
+"str": PackedStringArray("line1", "line2"),
+"tex": PackedStringArray("res://resources/textures/radialgrad_40x40.png")
+}]
+
+[sub_resource type="DBTable" id="DBTable_pn3no"]
+table_id = "cyoqbbny6fay"
+table_name = &"audio"
+id_type = 4
+locked_row_id = true
+column = [{
+"title": "sound",
+"value_type": 1005
+}]
+row_list = [{
+"asdf": "",
+"id": "fr7z9juv5btn0ry3",
+"sound": "res://resources/sfx/impactmining_000.wav"
+}, {
+"asdf": "",
+"id": "kksifbobxjeixe1h",
+"sound": "res://resources/sfx/impactmining_001.wav"
+}, {
+"asdf": "",
+"id": "1xjptzmsabm3ipym",
+"sound": "res://resources/sfx/impactmining_002.wav"
+}, {
+"asdf": "",
+"id": "88kxckuikuuehz5q",
+"sound": "res://resources/sfx/impactmining_003.wav"
+}, {
+"asdf": "",
+"id": "5fbb8dkitbek919o",
+"sound": "res://resources/sfx/impactmining_004.wav"
+}, {
+"asdf": "",
+"id": "7tqeyocp9g7tmx7e",
+"sound": "res://resources/sfx/rollover2.wav"
+}]
+
+[sub_resource type="DBTable" id="DBTable_o8rod"]
+table_id = "kctflk4zoe4q"
+table_name = &"color"
+id_type = 4
+locked_row_id = true
+column = [{
+"title": "color",
+"value_type": 1007
+}]
+row_list = [{
+"color": Color(0, 0, 0, 1),
+"id": "8kv8bhf0wbblz7q4"
+}, {
+"color": Color(0.683594, 0.0747681, 0.0747681, 1),
+"id": "4s4gbk2k4xvs1som"
+}, {
+"color": Color(0.839844, 0.638905, 0.10498, 1),
+"id": "ju1bm63ks2tksgxz"
+}, {
+"color": Color(0.410323, 0.519531, 0.0202942, 1),
+"id": "h044vyalcsyi46ny"
+}, {
+"color": Color(0.0782166, 0.910156, 0.793165, 1),
+"id": "246g2juo9bdl4k5l"
+}, {
+"color": Color(0.0249481, 0.0406057, 0.425781, 1),
+"id": "9vbkolb2vbx1xqug"
+}, {
+"color": Color(1, 1, 1, 1),
+"id": "ij3bfr2htc2lklbz"
+}]
+
+[sub_resource type="DBTable" id="DBTable_0xsve"]
+table_id = "up866bc7ba1f"
+table_name = &"image"
+id_type = 4
+locked_row_id = true
+column = [{
+"title": "tex",
+"value_type": 1004
+}]
+row_list = [{
+"id": "08z2sb1i7kwz5stg",
+"tex": "res://resources/textures/checker_2048x2048.png"
+}, {
+"id": "3vkpp84bmbifwrte",
+"tex": "res://resources/textures/radialgrad_40x40.png"
+}, {
+"id": "wfu1lzp1rzrgemxd",
+"tex": "res://resources/textures/sprites/crate2d.png"
+}, {
+"id": "pgubcucm9bi3fgbc",
+"tex": "res://resources/textures/sprites/manbrown_stand.png"
+}, {
+"id": "akhw2ofprgg1auhd",
+"tex": "res://resources/textures/sprites/marble.png"
+}, {
+"id": "pzxkbafc17n5ku02",
+"tex": ""
+}]
+
+[sub_resource type="DBTable" id="DBTable_h7j4c"]
+table_id = "baghofbmybtz"
+table_name = &"refs"
+id_type = 4
+locked_row_id = true
+column = [{
+"extid": "image",
+"title": "img",
+"value_type": 500
+}, {
+"extid": "audio",
+"title": "audio",
+"value_type": 500
+}, {
+"extid": "color",
+"title": "color",
+"value_type": 500
+}, {
+"title": "randomw",
+"value_type": 600
+}]
+ref_table = {
+"audio": "audio",
+"color": "color",
+"image": "img"
+}
+row_list = [{
+"audio": "kksifbobxjeixe1h",
+"color": "ju1bm63ks2tksgxz",
+"id": "e9b4bdxipbhn8i0o",
+"img": "3vkpp84bmbifwrte",
+"randomw": 0.5
+}, {
+"audio": "88kxckuikuuehz5q",
+"color": "4s4gbk2k4xvs1som",
+"id": "nhk8r398zp1hthad",
+"img": "wfu1lzp1rzrgemxd",
+"randomw": 1.0
+}, {
+"audio": "7tqeyocp9g7tmx7e",
+"color": "h044vyalcsyi46ny",
+"id": "ydpii0jxcp0mdeic",
+"img": "akhw2ofprgg1auhd",
+"randomw": 1.0
+}]
+
+[resource]
+db_table = {
+"arrays": SubResource("DBTable_lp64u"),
+"audio": SubResource("DBTable_pn3no"),
+"color": SubResource("DBTable_o8rod"),
+"image": SubResource("DBTable_0xsve"),
+"outer_table": ExtResource("1_4do3w"),
+"refs": SubResource("DBTable_h7j4c")
+}

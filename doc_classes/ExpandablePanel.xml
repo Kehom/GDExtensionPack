@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ExpandablePanel" inherits="Container" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Attaches itself into a side of its parent [i]Control[/i]. Can expand/shrink to show/hide its contents.
+	</brief_description>
+	<description>
+		When an instance of this widget is added, then it will automatically attach itself into the [i]left[/i] side of its parent [Control]. This side can be changed through the [member attach_to] property. Please note that some parent controls might pose a problem to the expandable panel, namely the containers, which normally take over the sizing and positioning of their children.
+		A direct [Control] child will become a "page" in the [code]ExpandablePanel[/code]. Multiple "pages" can exist and each one will have a corresponding "toggle button". Clicking this button expands/shrinks the panel from/to the attached side, revealing/hiding the relevant page contents.
+		Each "page" will dynamically generate properties in the inspector, under the [i]Pages[/i] category. Those properties are:
+		- [code]tooltip[/code] ([i]String[/i]): Assigned as [i]tooltip[/i] in the toggle button corresponding to the page.
+		- [code]icon_expanded[/code] ([i]Texture[/i]): Assigned as button icon when the panel is expanded.
+		- [code]icon_shrunk[/code] ([i]Texture[/i]): Assigned as button icon when the panel is shrunk.
+		- [code]disabled[/code] ([i]bool[/i]): Enable/disable the toggle button corresponding to the page.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="disable_page">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Given a "page" index [param page_index], disable its toggle button, disallowing manual interaction with it. Note that the page wont be shrunk to hide its contents if the panel is currently expanded.
+			</description>
+		</method>
+		<method name="enable_page">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Given a "page" index [param page_index], enable its toggle button, allowing manual interaction with it. Note that the page wont expand to reveal its contents if the panel is currently shrunk.
+			</description>
+		</method>
+		<method name="get_page_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the amount of children controls that generated a "page" in the expandable panel.
+			</description>
+		</method>
+		<method name="is_page_disabled" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Returns [code]true[/code] if the toggle button corresponding to the page at [param page_index] is currently disabled.
+			</description>
+		</method>
+		<method name="set_page_disabled">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<param index="1" name="disabled" type="bool" />
+			<description>
+				Given a "page" index [param page_index], change its toggle button disabled state to [param disabled].
+			</description>
+		</method>
+		<method name="set_page_icon_expanded">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<param index="1" name="texture" type="Texture2D" />
+			<description>
+				Assigns [param texture] as the icon of the toggle button corresponding to the page at [param page_index] when the panel is [b]expanded[/b].
+			</description>
+		</method>
+		<method name="set_page_icon_shrunk">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<param index="1" name="texture" type="Texture2D" />
+			<description>
+				Assigns [param texture] as the icon of the toggle button corresponding to the page at [param page_index] when the panel is [b]shrunk[/b].
+			</description>
+		</method>
+		<method name="set_page_tooltip">
+			<return type="void" />
+			<param index="0" name="page_index" type="int" />
+			<param index="1" name="new_title" type="String" />
+			<description>
+				Assigns [param new_title] as the toggle button [i]tooltip[/i], corresponding to the page at [param page_index].
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="animate_on_physics" type="bool" setter="set_animate_on_physics" getter="get_animate_on_physics" default="false">
+			If this is set to [code]true[/code] then animation will be handled through the "[code]_physics_process()[/code]" instead of "[code]_process()[/code]".
+		</member>
+		<member name="attach_to" type="int" setter="set_attach_to" getter="get_attach_to" enum="ExpandablePanel.AttachTo" default="0">
+			Determines the parent's side in which this panel will be attached to.
+		</member>
+		<member name="clip_contents" type="bool" setter="set_clip_contents" getter="is_clipping_contents" overrides="Control" default="true" />
+		<member name="current_page" type="int" setter="set_current_page" getter="get_current_page" default="-1">
+			Determines which page should be shown when the panel is expanded. If this is set to [code]-1[/code] then the panel will be shrunk.
+		</member>
+		<member name="expand_curve" type="Curve" setter="set_expand_curve" getter="get_expand_curve">
+			If animating when expanding the panel, this curve determines [i]how[/i] such animation will behave.
+		</member>
+		<member name="expand_icons_in_toggle_buttons" type="bool" setter="set_expand_icons_in_toggle_button" getter="get_expand_icons_in_toggle_button" default="false">
+			This will be directly assigned into the [member Button.expand_icon] of each toggle button.
+		</member>
+		<member name="expand_time" type="float" setter="set_expand_time" getter="get_expand_time" default="0.25">
+			Determines how long, in seconds, the expand animation will last. Set to [code]0[/code] to [b]disable[/b] expand animation.
+		</member>
+		<member name="keep_toggle_button_focus" type="bool" setter="set_keep_toggle_button_focus" getter="get_keep_toggle_button_focus" default="false">
+			If this is [code]true[/code] then focus will be kept on a toggle button when it's clicked. Otherwise the input focus will be released from the button.
+		</member>
+		<member name="shrink_curve" type="Curve" setter="set_shrink_curve" getter="get_shrink_curve">
+			If animating when shrinking the panel, this curve determines [i]how[/i] such animation will behave.
+		</member>
+		<member name="shrink_on_page_change" type="bool" setter="set_shrink_on_page_change" getter="get_shrink_on_page_change" default="true">
+			If this is [code]true[/code] then the panel will first shrink if it's currently expanded in in order to show a different page.
+		</member>
+		<member name="shrink_time" type="float" setter="set_shrink_time" getter="get_shrink_time" default="0.15">
+			Determines how long, in seconds, the shrink animation will last. Set to [code]0[/code] to [b]disable[/b] shrink animation.
+		</member>
+		<member name="use_tooltip" type="bool" setter="set_use_tooltip" getter="get_use_tooltip" default="true">
+			If this is [code]false[/code] then the toggle buttons will have no tooltip assigned to them.
+		</member>
+	</members>
+	<signals>
+		<signal name="expand_finished">
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Emitted when the panel finishes expanding, indicating which page ([param page_index]) became shown.
+			</description>
+		</signal>
+		<signal name="expand_started">
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Emitted when the panel started expanding, indicating which page ([param page_index]) will be shown.
+			</description>
+		</signal>
+		<signal name="page_button_clicked">
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Emitted when a toggle button is clicked, indicating the corresponding page index ([param page_index]).
+			</description>
+		</signal>
+		<signal name="shrink_finished">
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Emitted when the panel finishes shrinking, indicating which page ([param page_index]) just become hidden.
+			</description>
+		</signal>
+		<signal name="shrink_started">
+			<param index="0" name="page_index" type="int" />
+			<description>
+				Emitted when the panel starts shrinking, indicating which page ([param page_index]) will become hidden.
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="Left" value="0" enum="AttachTo">
+			Indicates that the expandable panel should attach itself to the [i]left[/i] side of its parent.
+		</constant>
+		<constant name="Top" value="1" enum="AttachTo">
+			Indicates that the expandable panel should attach itself to the [i]top[/i] side of its parent.
+		</constant>
+		<constant name="Right" value="2" enum="AttachTo">
+			Indicates that the expandable panel should attach itself to the [i]right[/i] side of its parent.
+		</constant>
+		<constant name="Bottom" value="3" enum="AttachTo">
+			Indicates that the expandable panel should attach itself to the [i]bottom[/i] side of its parent.
+		</constant>
+	</constants>
+</class>

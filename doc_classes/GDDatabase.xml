@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="GDDatabase" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Represents a (relational) database.
+	</brief_description>
+	<description>
+		An instance of this represents a database and it manages instances of [DBTable] resources.
+		Through the database a table can point into values from a different table.
+		Remember there is a dedicated editor for this resource type.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="add_table">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="int_id" type="bool" />
+			<param index="2" name="locked_id" type="bool" default="false" />
+			<description>
+				Attempts to create an embedded table ([DBTable] instance), titled [param table_name] and insert into this database. If [param int_id] is false then the created table will use strings as row IDs. If [param locked_id] is [code]true[/code] then row IDs will not be editable after a row is created.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="add_table_resource">
+			<return type="bool" />
+			<param index="0" name="table" type="DBTable" />
+			<description>
+				Attempts to add the incoming [param table] resource into the database.
+				Returns [code]true[/code] on success.
+				[b]NOTE[/b]: While it's possible to add a table resource that is already managed by another database, care must be taken:
+				- If the incoming table references another table, then this database will potentially contain errors since it's possible the referenced table does not exist or it might have unexpected data.
+				- If the incoming table is referenced by another table in the other database, that one might become invalid since the database attempts to ensure validity of referenced ID's when those are changed.
+			</description>
+		</method>
+		<method name="export_to_json" qualifiers="const">
+			<return type="void" />
+			<param index="0" name="directory" type="String" />
+			<param index="1" name="monolithic" type="bool" />
+			<param index="2" name="indent" type="String" default="&quot;&quot;" />
+			<description>
+				Exports the entire stored data into [i]JSON[/i] format, saving the file(s) in the specified [param directory] path. If [param monolithic] is [code]true[/code] then the entire data will be saved in a single file, with file name matching the name of the database resource file. Otherwise there will also be a file for each existing table. The indentation used in the output file can be determined by [param indent] parameter. As an example, if you want the [b]TAB[/b] to be used, then set the parameter to [code]"\t"[/code].
+			</description>
+		</method>
+		<method name="get_row_from" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="id" type="Variant" />
+			<param index="2" name="expand" type="bool" default="false" />
+			<description>
+				Given a table name [param table_name], retrieves a row from it, identified by row [param id]. If the table have values "pointing" to rows in a different table, it's possible to "expand" the pointed row data by setting [param expand] to [code]true[/code]. If this last argument is [code]false[/code], however, the values of the column pointing to the other table will remain as the stored data, that is, the actual ID of the other row.
+			</description>
+		</method>
+		<method name="get_row_from_by_index" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="index" type="int" />
+			<param index="2" name="expand" type="bool" />
+			<description>
+				Given a table name [param table_name], retrieves a row at [param index]. If the table have values "pointing" to rows in a different table, it's possible to "expand" the pointed row data by setting [param expand] to [code]true[/code]. If this last argument is [code]false[/code], however, the values of the column point to the other table will remain as the stored data, that is, the actual ID of the other row.
+			</description>
+		</method>
+		<method name="get_table" qualifiers="const">
+			<return type="DBTable" />
+			<param index="0" name="table_name" type="StringName" />
+			<description>
+				Given a table name [param table_name], retrieve the corresponding [DBTable] instance from the database.
+			</description>
+		</method>
+		<method name="get_table_list" qualifiers="const">
+			<return type="PackedStringArray" />
+			<description>
+				Retrieves the list of tables in the database.
+			</description>
+		</method>
+		<method name="has_table" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<description>
+				Returns [code]true[/code] if the [param table_name] corresponds to a table title that currently exists in the database.
+			</description>
+		</method>
+		<method name="is_table_referenced_by" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="other_table" type="StringName" />
+			<description>
+				Returns [code]true[/code] if table titled [param table_name] is referenced by the other table title [param other_table].
+			</description>
+		</method>
+		<method name="move_row">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="from" type="int" />
+			<param index="2" name="to" type="int" />
+			<description>
+				Given a table titled [param table_name], attempts to [i]move[/i] a row from [param from] index into [param to] index. Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="randomly_pick_row" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="expand" type="bool" />
+			<param index="2" name="random_number_generator" type="RandomNumberGenerator" default="null" />
+			<description>
+				Given a table titled [param table_name], randomly select a row and return it. If the table references values in a different table, the relevant ID's can be substituted by the other table's values by setting [param expand] to [code]true[/code].
+				Optionally a [RandomNumberGenerator] can be provided, which allows better control over the seed/state of the random number generation.
+			</description>
+		</method>
+		<method name="remove_row">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="index_list" type="PackedInt64Array" />
+			<description>
+				Given a table titled [param table_name], removes all rows at the incoming array of indices.
+			</description>
+		</method>
+		<method name="remove_table">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<description>
+				Given a table titled [param table_name], attempts to remove it from the database. Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="rename_table">
+			<return type="bool" />
+			<param index="0" name="from" type="StringName" />
+			<param index="1" name="to" type="StringName" />
+			<description>
+				Attempts to rename table titled [param from] into [param to]. Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="save">
+			<return type="bool" />
+			<param index="0" name="path" type="String" />
+			<param index="1" name="include_tables" type="bool" />
+			<description>
+				Attempts to save the database resource into the specified [param path]. If [param include_tables] is set to [code]true[/code] then all table resources will also be saved.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_has_column" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_title" type="String" />
+			<description>
+				Given a table titled [param table_name], returns [code]true[/code] if that table contains a column titled [param column_title].
+			</description>
+		</method>
+		<method name="table_has_random_setup" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<description>
+				Given a table titled [param table_name], returns [code]true[/code] if it contains a column of type [DBTable.VT_RandomWeight].
+			</description>
+		</method>
+		<method name="table_insert_column">
+			<return type="int" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_title" type="String" />
+			<param index="2" name="type" type="int" enum="DBTable.ValueType" />
+			<param index="3" name="index" type="int" default="-1" />
+			<param index="4" name="external" type="String" default="&quot;&quot;" />
+			<description>
+				Given a table titled [param table_name], attempts to insert a new column titled [param column_title], meant to store values of [param type] code. If [param index] is negative or "out of bounds", then the new column will be appended, otherwise in between existing columns.
+				If [param type] is either [constant DBTable.VT_ExternalString] or [constant DBTable.VT_ExternalInteger], the [param external] must be the name of the other table that will be referenced by the cells of the new column.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_insert_row">
+			<return type="int" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="values" type="Dictionary" />
+			<param index="2" name="index" type="int" />
+			<description>
+				Given a table titled [param table_name], attempt to insert a row into it. The incoming [param values] must contain [i]keys[/i] matching the column titles, holding the corresponding values. If [param index] is negative or "out of bounds", then the row will be appended, otherwise inserted between existing rows.
+				Returns the [i]index[/i] where the row was added to, [code]-1[/code] on error.
+			</description>
+		</method>
+		<method name="table_move_column">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="from" type="int" />
+			<param index="2" name="to" type="int" />
+			<description>
+				Given a table titled [param table_name], attempt to move a row from index [param from] into index [param to].
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_remove_column">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_index" type="int" />
+			<description>
+				Given a table titled [param table_name], attempt to remove a column at index [param column_index].
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_rename_column">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_index" type="int" />
+			<param index="2" name="new_title" type="String" />
+			<description>
+				Given a table titled [param table_name], attempt to rename the column at index [param column_index] into the provided title [param new_title].
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_set_cell_value">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_index" type="int" />
+			<param index="2" name="row_index" type="int" />
+			<param index="3" name="value" type="Variant" />
+			<description>
+				Given a table titled [param table_name], access cell at [param column_index] and [param row_index], attempting assign [param value] into it.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_set_row_id">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="row_index" type="int" />
+			<param index="2" name="new_id" type="Variant" />
+			<description>
+				Given a table titled [param table_name], attempt to change the ID of the row at [param row_index] to [param new_id]. Note that if the table has been created with "locked ids", then this will not work (and return [code]false[/code]).
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_sort_rows">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="column_index" type="int" />
+			<param index="2" name="ascending" type="bool" />
+			<description>
+				Given a table titles [param table_name], attempt to sort all rows by using column at index [param column_index] as value comparison. If [param ascending] is [code]true[/code], then row will be sorted in ascending order.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+		<method name="table_sort_rows_by_id">
+			<return type="bool" />
+			<param index="0" name="table_name" type="StringName" />
+			<param index="1" name="ascending" type="bool" default="true" />
+			<description>
+				Given a table titled [param table_name], attempt to sort all rows by using the row IDs as value comparison. If [param ascending] is [code]true[/code], then rows will be sorted in ascending order.
+				Returns [code]true[/code] on success.
+			</description>
+		</method>
+	</methods>
+</class>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="RadialImpulse2D" inherits="Node2D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Applies an impulse into all 2D physical bodies within radius of this node.
+	</brief_description>
+	<description>
+		Upon calling [method apply_impulse], an impulse will be applied into all 2D physical bodies that are in radius from this node's position.
+		Internally this uses a circle [CollisionShape2D] to detect which bodies are in radius.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="apply_impulse">
+			<return type="void" />
+			<description>
+				Request this node to apply an impulse into all 2D physical bodies that are within [member radius] and in the relevant collision layers. Please note that the impulse will be applied only in the physics iteration, meaning that it [i]might[/i] be slightly delayed in comparison to the actual call to this function. If a task is required to be done when the impulse is actually applied, then perform that in an event handler, dealing with [signal impulse_applied].
+				The magnitude of the impulse is determined by the [member force] and [member falloff] properties.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="collision_mask" type="int" setter="set_collision_mask" getter="get_collision_mask" default="1">
+			The physics layers the internal area scan.
+		</member>
+		<member name="falloff" type="int" setter="set_falloff" getter="get_falloff" enum="RadialImpulse2D.ImpulseFalloff" default="0">
+			Determines if the magnitude of the impulse will decay the further it is from the center or not.
+		</member>
+		<member name="force" type="float" setter="set_force" getter="get_force" default="0.0">
+			This is the (base) magnitude of the applied impulse when calling [method apply_impulse].
+		</member>
+		<member name="radius" type="float" setter="set_radius" getter="get_radius" default="10.0">
+			The radius of the internal circular area that detects which bodies should get an impulse applied to when [method apply_impulse] is called.
+		</member>
+	</members>
+	<signals>
+		<signal name="impulse_applied">
+			<description>
+				When [method apply_impulse] is called, the impulse is not immediately applied, but rather setup to be done in the physics iteration of this node. This signal is emitted as soon as the impulse occurs.
+			</description>
+		</signal>
+	</signals>
+	<constants>
+		<constant name="CONSTANT" value="0" enum="ImpulseFalloff">
+			When [member falloff] is set to this value, then the impulse magnitude will be identical in every single affected physical body, regardless of distance from this node.
+		</constant>
+		<constant name="LINEAR" value="1" enum="ImpulseFalloff">
+			When [member falloff] is set to this value, then the impulse magnitude linearly decays the further it is from the center of this node, until it becomes [i]0[/i] at the exact [member radius] distance.
+		</constant>
+	</constants>
+</class>

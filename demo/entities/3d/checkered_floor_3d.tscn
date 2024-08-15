@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c06p7rk62jojf"]
+
+[ext_resource type="Texture2D" uid="uid://bwds426hr4yq1" path="res://resources/textures/checker_2048x2048.png" id="1_imryk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rukin"]
+albedo_texture = ExtResource("1_imryk")
+uv1_scale = Vector3(3, 2, 3)
+uv1_offset = Vector3(1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a08c5"]
+material = SubResource("StandardMaterial3D_rukin")
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fe3q4"]
+size = Vector3(10, 1, 10)
+
+[node name="checkered_floor3d" type="StaticBody3D"]
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_a08c5")
+
+[node name="shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
+shape = SubResource("BoxShape3D_fe3q4")

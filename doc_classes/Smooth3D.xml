@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Smooth3D" inherits="Node3D" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Automate interpolation of visual representation state.
+	</brief_description>
+	<description>
+		This plugin is largely based on original work by Lawnjelly (https://github.com/lawnjelly/smoothing-addon). The main goal here is to help keep fixed physics updates while achieving smoother animations through interpolation. The key differences added here are:
+		- Each "component" of the transform (translation, orientation and scale) can be independently set to either fully interpolate, don't interpolate or be completely ignored.
+		- There is one Node [AutoInterpolate] that can be used for both 2D and 3D, depending on the target node, which can be chosen. This node will optionally interpolate its children and also a list that can be assigned within the editor.
+		- Interpolation here uses global transform which ensures correct behavior regardless of node hierarchy.
+		Usage is as simple as adding this node between the physical object and its visual representation.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="snap_to_target">
+			<return type="void" />
+			<description>
+				Calling this function will [i]snap[/i] (skip interpolation) this node into the target, respecting [member interpolate_orientation], [member interpolate_scale] and [member interpolate_translation] options.
+			</description>
+		</method>
+		<method name="teleport_to">
+			<return type="void" />
+			<param index="0" name="target" type="Transform3D" />
+			<description>
+				Instantaneously change this node's transform into [param target]. This will respect [member interpolate_orientation], [member interpolate_scale] and [member interpolate_translation] options.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="interpolate_orientation" type="int" setter="set_interpolate_orientation" getter="get_interpolate_orientation" enum="Smooth3D.InterpMode" default="1">
+			Determines if orientation should be interpolated or not.
+		</member>
+		<member name="interpolate_scale" type="int" setter="set_interpolate_scale" getter="get_interpolate_scale" enum="Smooth3D.InterpMode" default="2">
+			Determines if scale should be interpolated or not.
+		</member>
+		<member name="interpolate_translation" type="int" setter="set_interpolate_translation" getter="get_interpolate_translation" enum="Smooth3D.InterpMode" default="1">
+			Determines if translation should be interpolated or not.
+		</member>
+		<member name="target" type="NodePath" setter="set_target" getter="get_target" default="NodePath(&quot;&quot;)">
+			If this is not set then this node will follow its direct parent if it's also a 2D node. Otherwise, the transform to be interpolated will be taken from this property's node.
+		</member>
+	</members>
+	<constants>
+		<constant name="Snap" value="0" enum="InterpMode">
+			If set to this value, then the transform "component" will not interpolate but "snap" into the target.
+		</constant>
+		<constant name="Full" value="1" enum="InterpMode">
+			If set to this value, then the transform "component" will be fully interpolated.
+		</constant>
+		<constant name="Ignore" value="2" enum="InterpMode">
+			If set to this value, then the transform "component" will completely ignore the target.
+		</constant>
+	</constants>
+</class>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Line3D" inherits="Object" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Allows drawing (debug) lines in 3D.
+	</brief_description>
+	<description>
+		This is registered as a singleton, so no need to create an instance when using functions.
+		This provides means to draw lines in 3D. Please note that it's meant for debugging purposes!
+		Lines can be drawn for a single frame or for a specified amount of seconds.
+		All functions can be directly used as this is a singleton.
+		Note that by default all of the functions will be "empty" when exporting the project for release ("non debug builds"). This means that debug code can be kept in the project if so desired. To change this aspect the extension must be recompiled.
+		Another default behavior is related to how time is counted for "timed lines". It internally uses the "[code]_process()[/code]". If it's desired to use "[code]_physics_process()[/code]" instead, then open project settings, navigate to [code]Keh Extension Pack -&gt; Debug Line 3D[/code] then enable [code]use_physics_process[/code].
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="add_from_vector">
+			<return type="void" />
+			<param index="0" name="point" type="Vector3" />
+			<param index="1" name="vector" type="Vector3" />
+			<param index="2" name="color" type="Color" default="Color(1, 1, 1, 1)" />
+			<description>
+				Creates a line that will be drawn for a single frame, based on the direction and length of [param vector], starting from [param point], using [param color] as its color.
+			</description>
+		</method>
+		<method name="add_line">
+			<return type="void" />
+			<param index="0" name="point0" type="Vector3" />
+			<param index="1" name="point1" type="Vector3" />
+			<param index="2" name="color" type="Color" default="Color(1, 1, 1, 1)" />
+			<description>
+				Creates a line that will be drawn for a single frame, starting at [param point0] and ending at [param point1], using [param color] as its color.
+			</description>
+		</method>
+		<method name="add_timed_from_vector">
+			<return type="void" />
+			<param index="0" name="point" type="Vector3" />
+			<param index="1" name="vector" type="Vector3" />
+			<param index="2" name="time" type="float" />
+			<param index="3" name="color" type="Color" default="Color(1, 1, 1, 1)" />
+			<description>
+				Creates a line that will remain on screen for [param time] seconds, based on the direction and length of [param vector], starting from [param point], using [param color] as its color.
+			</description>
+		</method>
+		<method name="add_timed_line">
+			<return type="void" />
+			<param index="0" name="point0" type="Vector3" />
+			<param index="1" name="point1" type="Vector3" />
+			<param index="2" name="time" type="float" />
+			<param index="3" name="color" type="Color" default="Color(1, 1, 1, 1)" />
+			<description>
+				Creates a line that will remain on screen for [param time] seconds, starting at [param point0] and ending at [param point1], using [param color] as its color.
+			</description>
+		</method>
+		<method name="clear_lines">
+			<return type="void" />
+			<description>
+				Removes all lines, including timed ones.
+			</description>
+		</method>
+		<method name="disable">
+			<return type="void" />
+			<description>
+				Disables all functionality of this debugging tool. If there are any drawn lines, those will also be removed.
+			</description>
+		</method>
+		<method name="enable">
+			<return type="void" />
+			<description>
+				Enables functionality of this debugging tool.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="enabled" type="bool" setter="set_enabled" getter="is_enabled" default="false">
+			Allows enabling/disabling all functionality of this debugging tool.
+		</member>
+	</members>
+</class>

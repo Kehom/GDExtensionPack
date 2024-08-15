@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-120,-44)">
+        <g id="music_note_8th">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d">
+        </g>
+        <g id="smooth_3d">
+        </g>
+        <g id="radial_impulse2d">
+        </g>
+        <g id="radial_impulse3d">
+        </g>
+        <g id="expandable_panel">
+        </g>
+        <g id="spin_slider">
+        </g>
+        <g id="zoom_in">
+        </g>
+        <g id="zoom_out">
+        </g>
+        <g id="zoom_reset">
+        </g>
+        <g id="grid_toggle">
+        </g>
+        <g id="snap_toggle">
+        </g>
+        <g id="checked">
+        </g>
+        <g id="updown">
+        </g>
+        <g id="scroll_up">
+        </g>
+        <g id="scroll_down">
+        </g>
+        <g id="scroll_right">
+        </g>
+        <g id="scroll_left">
+        </g>
+        <g id="accordion">
+        </g>
+        <g id="accordion_item">
+        </g>
+        <g id="audio_master">
+        </g>
+        <g id="tabular_box">
+        </g>
+        <g id="filedir_picker">
+            <path d="M122,48C122.25,47.75 123,47.5 123,47.5L126.781,47.5L129.242,50.494L133,50.494C133,50.494 133.751,50.749 134,51C134.249,51.251 134.495,52 134.495,52L134.495,55C134.495,55 134.249,55.75 134,56C133.751,56.25 133,56.5 133,56.5L123,56.5C123,56.5 122.25,56.25 122,56C121.75,55.75 121.5,55 121.5,55L121.5,49C121.5,49 121.75,48.25 122,48Z" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;"/>
+            <path d="M134.495,52L134.495,50C134.495,50 134.249,49.25 134,49C133.751,48.75 133,48.501 133,48.501L127.591,48.501" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;"/>
+            <rect x="132" y="54" width="1" height="1" style="fill:rgb(142,239,151);"/>
+            <g transform="matrix(1,0,0,1,-2,0)">
+                <rect x="132" y="54" width="1" height="1" style="fill:rgb(142,239,151);"/>
+            </g>
+            <g transform="matrix(1,0,0,1,-4,0)">
+                <rect x="132" y="54" width="1" height="1" style="fill:rgb(142,239,151);"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqaec30vig8oi"]
+
+[ext_resource type="Texture2D" uid="uid://cxj4ldueg6m6g" path="res://resources/textures/sprites/marble.png" id="1_ds6is"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_esixc"]
+friction = 0.4
+bounce = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ik6rv"]
+radius = 16.0
+
+[node name="ball1" type="RigidBody2D"]
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_esixc")
+continuous_cd = 1
+metadata/_edit_group_ = true
+
+[node name="visual" type="Sprite2D" parent="."]
+texture = ExtResource("1_ds6is")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ik6rv")

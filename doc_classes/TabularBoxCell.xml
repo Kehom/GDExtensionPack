@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="TabularBoxCell" inherits="Control" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Base functionality to show and edit a single cell's value in the [TabularBox].
+	</brief_description>
+	<description>
+		In order to properly support multiple value types to be shown and edited in the [TabularBox] control, implementations of this class are required.
+		Several functions are provided to help implementations perform the required tasks, from applying theming into internal controls to properly calculate sizes.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="_apply_extra_settings" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="extra_settings" type="Dictionary" />
+			<description>
+				This function will be called by the tabular box as part of the initialization of the cell and will provide additional settings ([param extra_settings]) depending on what has been provided by the data source. If the cell does not require this additional data then there is no need to implement this function.
+			</description>
+		</method>
+		<method name="_assign_value" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="value" type="Variant" />
+			<description>
+				This is a required function and it will be called in order to ensure the cell properly displays the current value from the data source, which is provided through [param value].
+			</description>
+		</method>
+		<method name="_check_theme" qualifiers="virtual">
+			<return type="void" />
+			<description>
+				This function is called right after the cell is instantiated and is meant to ensure any internal control has proper styling. This is also a good moment to calculate the minimum required height to display this cell while also notifying it by calling [method set_min_height].
+			</description>
+		</method>
+		<method name="_commit_changes" qualifiers="virtual">
+			<return type="void" />
+			<description>
+				This is an optional function and it will be called by the tabular box whenever any possibly pending value change must be forcefully committed. This is specially useful to ensure that cells with keyboard input (such [LineEdit]) can properly report to the data source that something has been changed.
+				In the case a value is indeed changed through this function, remember to call [method notify_value_changed].
+			</description>
+		</method>
+		<method name="_requires_file_dialog" qualifiers="virtual const">
+			<return type="bool" />
+			<description>
+				Optional function. Implement this and make it return [code]true[/code] in case the cell implementation might require usage of a [FileDialog].
+			</description>
+		</method>
+		<method name="_selected_changed" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="selected" type="bool" />
+			<description>
+				Optional function. This function is called by the tabular box to report that the selected state of the cell has been changed. This is specially useful to ensure any internal control properly receives or loses focus when the cell is selected or deselected.
+			</description>
+		</method>
+		<method name="_setup_shared" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="parent" type="Control" />
+			<description>
+				Optional function. If this is implemented the [method _share_with] must implemented too. This function is called on the very first cell of the column and is used to perform initial setup of data to be shared between all other cells of the same column. The incoming [param parent] is as node that can be used as a parent for any possible internal control that can be shared between the cells.
+			</description>
+		</method>
+		<method name="_share_with" qualifiers="virtual">
+			<return type="void" />
+			<param index="0" name="other_cell" type="TabularBoxCell" />
+			<description>
+				Optional function that must be implemented if [method _setup_shared] is also implemented.
+				This function will also be called on the very first cell of the column, however the [param other_cell] is a different cell on the same column. Since the first cell performed shared data initialization, it can then be provided to the [param other_cell].
+			</description>
+		</method>
+		<method name="apply_button_style">
+			<return type="void" />
+			<param index="0" name="into_button" type="Button" />
+			<description>
+				This function can be called to apply configured theming from the parent tabular box into the provided button [param into_button].
+			</description>
+		</method>
+		<method name="apply_line_edit_style">
+			<return type="void" />
+			<param index="0" name="line_edit" type="LineEdit" />
+			<description>
+				This function can be called to apply configured theming from the parent tabular box into the provided line edit [param line_edit].
+			</description>
+		</method>
+		<method name="get_button_height" qualifiers="const">
+			<return type="float" />
+			<description>
+				This returns the height of a button that is properly styled. If that button has been themed by [method apply_button_style] then the returned height will match.
+			</description>
+		</method>
+		<method name="get_button_min_height" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="include_font" type="bool" />
+			<param index="1" name="icon" type="Texture2D" />
+			<param index="2" name="make_square" type="bool" />
+			<description>
+				This function can be used to retrieve the minimum height of a button while taking into account the styling (from [method apply_button_style]), an icon and optionally include the font in the calculation.
+			</description>
+		</method>
+		<method name="get_internal_margin_bottom" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the margin required to be used internally at the bottom part of the cell.
+			</description>
+		</method>
+		<method name="get_internal_margin_left" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the margin required to be used internally at the left part of the cell.
+			</description>
+		</method>
+		<method name="get_internal_margin_right" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the margin required to be used internally at the right part of the cell.
+			</description>
+		</method>
+		<method name="get_internal_margin_top" qualifiers="const">
+			<return type="float" />
+			<description>
+				Returns the margin required to be used internally at the top part of the cell.
+			</description>
+		</method>
+		<method name="get_row_index" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the row index where this cell is in.
+			</description>
+		</method>
+		<method name="get_style_background" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Call this to obtain the style used to draw the background of the tabular box. Typically this is not entirely necessary, however it's provided just in case.
+			</description>
+		</method>
+		<method name="get_style_button_hover" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Call this to obtain the style meant to be assigned into a button when mouse cursor is over it. More specifically [theme_item Button.hover].
+			</description>
+		</method>
+		<method name="get_style_button_normal" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Call this to obtain the style meant to be assigned into a button when in "normal" state. More specifically [theme_item Button.normal].
+			</description>
+		</method>
+		<method name="get_style_button_pressed" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Call this to obtain the style meant to be assigned into a button when it's pressed. More specifically [theme_item Button.pressed].
+			</description>
+		</method>
+		<method name="get_style_caret_color" qualifiers="const">
+			<return type="Color" />
+			<description>
+				Retrieve the color meant to be assigned into the caret of text input boxes. As an example [theme_item LineEdit.caret_color].
+			</description>
+		</method>
+		<method name="get_style_empty" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Retrieve the empty style, which can be used with several internal controls.
+			</description>
+		</method>
+		<method name="get_style_focus" qualifiers="const">
+			<return type="StyleBox" />
+			<description>
+				Call this to obtain the style used to highlight a focused control.
+			</description>
+		</method>
+		<method name="get_style_font" qualifiers="const">
+			<return type="Font" />
+			<description>
+				Call this to obtain the font meant to be used within cells.
+			</description>
+		</method>
+		<method name="get_style_font_color" qualifiers="const">
+			<return type="Color" />
+			<description>
+				Call this to obtain the color meant to be used as the font color of the cells.
+			</description>
+		</method>
+		<method name="get_style_font_selected_color" qualifiers="const">
+			<return type="Color" />
+			<description>
+				Call this to obtain the color meant to be used in cell text when it's selected.
+			</description>
+		</method>
+		<method name="get_style_font_size" qualifiers="const">
+			<return type="int" />
+			<description>
+				Call this to obtain the font size meant to be applied onto cell text.
+			</description>
+		</method>
+		<method name="get_style_icon_checked" qualifiers="const">
+			<return type="Texture2D" />
+			<description>
+				Returns the texture used to represent checked "checkboxes".
+			</description>
+		</method>
+		<method name="get_style_icon_no_texture" qualifiers="const">
+			<return type="Texture2D" />
+			<description>
+				Returns the texture used to represent non existing/blank image.
+			</description>
+		</method>
+		<method name="get_style_icon_trash" qualifiers="const">
+			<return type="Texture2D" />
+			<description>
+				Returns the texture representing a "trash bin".
+			</description>
+		</method>
+		<method name="get_style_icon_unchecked" qualifiers="const">
+			<return type="Texture2D" />
+			<description>
+				Returns the texture used to represent unchecked "checkboxes".
+			</description>
+		</method>
+		<method name="get_style_selection_color" qualifiers="const">
+			<return type="Color" />
+			<description>
+				Call this to obtain the color used to show the text selection highlight.
+			</description>
+		</method>
+		<method name="get_style_separation" qualifiers="const">
+			<return type="int" />
+			<description>
+				Call this to obtain the constant indicating the separation between inner controls inside cells.
+			</description>
+		</method>
+		<method name="has_theme" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns true if the theme has been properly initialized. If this returns false then any of the theming retrievers will not return the expected value.
+			</description>
+		</method>
+		<method name="notify_selected">
+			<return type="void" />
+			<description>
+				Call this function to notify the owning tabular box that this cell is requesting to be selected.
+			</description>
+		</method>
+		<method name="notify_value_changed">
+			<return type="void" />
+			<param index="0" name="new_value" type="Variant" />
+			<description>
+				Call this function to notify the owning tabular box that this cell's value has been changed, proving the new value through [param new_value].
+			</description>
+		</method>
+		<method name="request_file_dialog">
+			<return type="void" />
+			<param index="0" name="title" type="String" />
+			<param index="1" name="filters" type="PackedStringArray" />
+			<param index="2" name="selected_handler" type="Callable" />
+			<description>
+				Call this function to tell the owning tabular box to display the file dialog. The [param title] and [param filters] are directly applied into the dialog as title and file filtering, respectively. The [param selected_handler] will be used as the event handler when the file is selected.
+				Remember to implement [method _requires_file_dialog] and return true from it, otherwise calling this function will do nothing.
+			</description>
+		</method>
+		<method name="request_select_next">
+			<return type="void" />
+			<description>
+				Call this to request the tabular box to select the next cell. This is typically done after committing the cell value through text input.
+			</description>
+		</method>
+		<method name="request_unselect">
+			<return type="void" />
+			<description>
+				Call this to request to tabular box to deselect this cell.
+			</description>
+		</method>
+		<method name="set_min_height">
+			<return type="void" />
+			<param index="0" name="height" type="int" />
+			<description>
+				This must be called to specify this cell's minimum height. Typically this is done within the [method _check_theme], which is where the theming is applied and the moment it's possible to properly calculate the value.
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="clip_contents" type="bool" setter="set_clip_contents" getter="is_clipping_contents" overrides="Control" default="true" />
+		<member name="focus_mode" type="int" setter="set_focus_mode" getter="get_focus_mode" overrides="Control" enum="Control.FocusMode" default="2" />
+		<member name="mouse_filter" type="int" setter="set_mouse_filter" getter="get_mouse_filter" overrides="Control" enum="Control.MouseFilter" default="1" />
+	</members>
+	<signals>
+		<signal name="select_next">
+			<description>
+				This signal is triggered after calling [method request_select_next]. The owning tabular box listens to this event and will attempt to select the next cell according to the internal settings.
+			</description>
+		</signal>
+		<signal name="selected">
+			<description>
+				This signal is triggered after calling [method notify_selected]. The owning tabular box listens to this event and will attempt to select the cell.
+			</description>
+		</signal>
+		<signal name="unselect">
+			<description>
+				This signal is triggered after calling [method request_unselect]. The owning tabular box listens to this event and will attempt to deselect the cell.
+			</description>
+		</signal>
+		<signal name="value_changed">
+			<param index="0" name="new_value" type="Variant" />
+			<description>
+				This signal is triggered after calling [method notify_value_changed]. The owning tabular box listens to this event will attempt to update the change within the data source or relaying through a signal depending on the flags of the column of where this cell is at.
+			</description>
+		</signal>
+	</signals>
+</class>

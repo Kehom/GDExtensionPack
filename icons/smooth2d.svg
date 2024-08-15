@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-20,-24)">
+        <g id="node_colors">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d" transform="matrix(1,0,0,1,20,0.15611)">
+            <path d="M3,38C-0.025,21.747 16.025,21.833 13,38" style="fill:none;stroke:rgb(141,165,243);stroke-width:1.5px;"/>
+            <g transform="matrix(3.46981,0,0,3.46981,-78.5406,-71.534)">
+                <circle cx="23.5" cy="31.5" r="0.5" style="fill:rgb(141,165,243);"/>
+            </g>
+            <g transform="matrix(3.46981,0,0,3.46981,-78.5406,-78.034)">
+                <circle cx="23.5" cy="31.5" r="0.5" style="fill:rgb(141,165,243);"/>
+            </g>
+            <g transform="matrix(3.46981,0,0,3.46981,-73.5406,-83.2991)">
+                <circle cx="23.5" cy="31.5" r="0.5" style="fill:rgb(141,165,243);"/>
+            </g>
+            <g transform="matrix(3.46981,0,0,3.46981,-68.5406,-78.034)">
+                <circle cx="23.5" cy="31.5" r="0.5" style="fill:rgb(141,165,243);"/>
+            </g>
+            <g transform="matrix(3.46981,0,0,3.46981,-68.5406,-71.5642)">
+                <circle cx="23.5" cy="31.5" r="0.5" style="fill:rgb(141,165,243);"/>
+            </g>
+        </g>
+        <g id="smooth_3d">
+        </g>
+    </g>
+</svg>

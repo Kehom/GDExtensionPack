@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="DBTable" inherits="Resource" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Represents [GDDatabase] tables.
+	</brief_description>
+	<description>
+		The [GDDatabase] requires instances of this resource to represent tables. Directly using a [code]DBTable[/code] does not allow editing stored data, only query it.
+		When a column is added into the table, it must be of a type identified by the code in [enum ValueType]. This "tells" the table which value types are meant to be stored.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="get_cell_value" qualifiers="const">
+			<return type="Variant" />
+			<param index="0" name="row_id" type="Variant" />
+			<param index="1" name="column_title" type="String" />
+			<description>
+				Retrieve the value stored in the cell at the column [param column_title] and row identified by [param row_id].
+			</description>
+		</method>
+		<method name="get_column_by_index" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="index" type="int" />
+			<description>
+				Given a column [param index], retrieve its information stored in a dictionary. The expected information is:
+				- [code]title[/code] (String): The title of the column.
+				- [code]value_type[/code] (int): The type of the values stored in the column. This is one from the [enum DBTable.ValueType].
+				- [code]extid[/code] (String): If not empty, the name of another table, referenced by values in this column.
+				If the provided [param index] doesn't correspond to a valid column then an empty dictionary will be returned.
+			</description>
+		</method>
+		<method name="get_column_by_title" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="title" type="String" />
+			<description>
+				Given a column [param title], retrieve its information stored in a dictionary. The expected information is:
+				- [code]title[/code] (String): The title of the column.
+				- [code]value_type[/code] (int): The type of the values stored in the column. This is one from the [enum DBTable.ValueType].
+				- [code]extid[/code] (String): If not empty, the name of another table, referenced by values in this column.
+				If the provided [param title] doesn't correspond to a valid column then an empty dictionary will be returned.
+			</description>
+		</method>
+		<method name="get_column_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the amount of columns in this table.
+			</description>
+		</method>
+		<method name="get_column_title" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="column_index" type="int" />
+			<description>
+				Given the column index [param column_index], retrieve its title.
+			</description>
+		</method>
+		<method name="get_column_value_type" qualifiers="const">
+			<return type="int" enum="DBTable.ValueType" />
+			<param index="0" name="column_title" type="String" />
+			<description>
+				Given a column index [param column_index], retrieve its value type.
+			</description>
+		</method>
+		<method name="get_data_as_json" qualifiers="const">
+			<return type="String" />
+			<param index="0" name="indent" type="String" default="&quot;&quot;" />
+			<description>
+				Convert the stored data into [i]JSON[/i] format. Indentation can be controlled by the [param indent]. If you want to use the [b]TAB[/b] as indentation then set the parameter to [code]"\t"[/code].
+			</description>
+		</method>
+		<method name="get_id_type" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the row ID type of this table. It should be either [constant TYPE_INT] or [constant TYPE_STRING].
+			</description>
+		</method>
+		<method name="get_random_weight_column_title" qualifiers="const">
+			<return type="String" />
+			<description>
+				If this table contains a column configured to handle [i]random weights[/i] (that is, a column of [constant VT_RandomWeight] value type), then this function retrieve its name, otherwise it will return an empty string.
+			</description>
+		</method>
+		<method name="get_reference_list" qualifiers="const">
+			<return type="PackedStringArray" />
+			<description>
+				Returns a list of tables that are "referenced" by this one.
+			</description>
+		</method>
+		<method name="get_referenced_by_list" qualifiers="const">
+			<return type="PackedStringArray" />
+			<description>
+				Returns a list of tables that references this one.
+			</description>
+		</method>
+		<method name="get_row" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="row_id" type="Variant" />
+			<description>
+				Given a row identified by [param row_id], retrieve all values of it. The returned dictionary should contain a key for each existing column in the table, matching the title. The value of that key is the corresponding stored [i]cell value[/i].
+			</description>
+		</method>
+		<method name="get_row_accumulated_weight" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="row_index" type="int" />
+			<description>
+				If this table contains a column configured to handle [i]random weights[/i] (that is, a column of [constant VT_RandomWeight] value type), then this function retrieves the accumulated weight of the row at [param row_index]. Otherwise this returns [code]0[/code].
+			</description>
+		</method>
+		<method name="get_row_by_index" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="row_index" type="int" />
+			<description>
+				Retrieve all values of a row, given its index [param row_index]. The returned dictionary should contain a key for each existing column in the table, matching the title. The value of that key is the corresponding stored [i]cell value[/i].
+			</description>
+		</method>
+		<method name="get_row_count" qualifiers="const">
+			<return type="int" />
+			<description>
+				Returns the amount of rows stored in this table.
+			</description>
+		</method>
+		<method name="get_row_probability" qualifiers="const">
+			<return type="float" />
+			<param index="0" name="row_index" type="int" />
+			<description>
+				Get the probability (in range [0..1]) of a row specified by [param row_index] being picked when calling [method pick_random_row].
+			</description>
+		</method>
+		<method name="get_table_id" qualifiers="const">
+			<return type="String" />
+			<description>
+				When a table instance is created, an ID is generated. This is meant to properly verify certain internal data. This function returns said ID.
+			</description>
+		</method>
+		<method name="get_table_name" qualifiers="const">
+			<return type="StringName" />
+			<description>
+				Retrieves the name of this table.
+			</description>
+		</method>
+		<method name="get_total_weight_sum" qualifiers="const">
+			<return type="float" />
+			<description>
+				If this table contains a column configured to handle [i]random weights[/i] (that is, a column of [constant VT_RandomWeight] value type), then this function returns the total weigh sum.
+			</description>
+		</method>
+		<method name="has_column" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="title" type="String" />
+			<description>
+				Returns [code]true[/code] if [param title] corresponds to an existing column title in this table.
+			</description>
+		</method>
+		<method name="has_random_weight_column" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if this table contains a column configured to handle [i]random weights[/i] (that is, a column of [constant VT_RandomWeight] value type).
+			</description>
+		</method>
+		<method name="is_referenced_by" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="other_table_name" type="StringName" />
+			<description>
+				Returns [code]true[/code] a different table named [param other_table_name] references this one. This function will only work if both tables were loaded by the owning [GDDatabase], otherwise the data will not be correctly set.
+			</description>
+		</method>
+		<method name="is_referencing" qualifiers="const">
+			<return type="bool" />
+			<param index="0" name="other_table_name" type="StringName" />
+			<description>
+				Returns [code]true[/code] if this table is referencing another table named [param other_table_name].
+			</description>
+		</method>
+		<method name="is_row_id_locked" qualifiers="const">
+			<return type="bool" />
+			<description>
+				Returns [code]true[/code] if this table has been created with a flag disallowing editing row IDs.
+			</description>
+		</method>
+		<method name="pick_random_row" qualifiers="const">
+			<return type="Dictionary" />
+			<param index="0" name="random_number_generator" type="RandomNumberGenerator" default="null" />
+			<description>
+				Randomly select a row from the table and returns it. If there is a column configured to handle [i]random weights[/i] (that is, a column of [constant VT_RandomWeight] value type), then the weight system will be used.
+				A [RandomNumberGenerator] can be provided through [param random_number_generator], providing more control over seed/state when requesting random rows.
+			</description>
+		</method>
+	</methods>
+	<constants>
+		<constant name="VT_UniqueString" value="1" enum="ValueType">
+			Cells in a column of this type store [i]unique strings[/i]. No other cell in the specific column should be repeated.
+		</constant>
+		<constant name="VT_UniqueInteger" value="2" enum="ValueType">
+			Cells in a column of this type store [i]unique integers[/i]. No other cell in the specific column should be repeated.
+		</constant>
+		<constant name="VT_ExternalString" value="500" enum="ValueType">
+			Cells in a column of this type store [i]string IDs[/i] pointing to rows in a different table.
+		</constant>
+		<constant name="VT_ExternalInteger" value="501" enum="ValueType">
+			Cells in a column of this type store [í]integer IDs[/i] pointing to rows in a different table.
+		</constant>
+		<constant name="VT_RandomWeight" value="600" enum="ValueType">
+			Cells in a column of this type represent random [i]weights[/i], or in other words, relative probabilities.
+			When a column of this type is created, rows are automatically assigned their corresponding accumulated weights.
+		</constant>
+		<constant name="VT_String" value="1000" enum="ValueType">
+			Store string values in cells of this type.
+		</constant>
+		<constant name="VT_Bool" value="1001" enum="ValueType">
+			Allow storage of boolean values.
+		</constant>
+		<constant name="VT_Integer" value="1002" enum="ValueType">
+			Store integer values.
+		</constant>
+		<constant name="VT_Float" value="1003" enum="ValueType">
+			Store floating point values.
+		</constant>
+		<constant name="VT_Texture" value="1004" enum="ValueType">
+			Store [i]paths[/i] to texture resources.
+		</constant>
+		<constant name="VT_Audio" value="1005" enum="ValueType">
+			Store [i]paths[/i] to audio resources.
+		</constant>
+		<constant name="VT_GenericRes" value="1006" enum="ValueType">
+			Store [i]paths[/i] to any kind of [Resource].
+		</constant>
+		<constant name="VT_Color" value="1007" enum="ValueType">
+			Store color values.
+		</constant>
+		<constant name="VT_MultiLineString" value="1008" enum="ValueType">
+			Allow storage of multi-line strings.
+		</constant>
+		<constant name="VT_StringArray" value="1500" enum="ValueType">
+			Allow storage of arrays of strings.
+		</constant>
+		<constant name="VT_IntegerArray" value="1501" enum="ValueType">
+			Allow storage of arrays of integers.
+		</constant>
+		<constant name="VT_FloatArray" value="1502" enum="ValueType">
+			Allow storage of arrays of floating point numbers.
+		</constant>
+		<constant name="VT_TextureArray" value="1503" enum="ValueType">
+			Allow storage of arrays of [i]paths[/i] to texture resources.
+		</constant>
+		<constant name="VT_AudioArray" value="1504" enum="ValueType">
+			Allow storage of arrays of [i]paths[/i] to audio resources.
+		</constant>
+		<constant name="VT_GenericResArray" value="1505" enum="ValueType">
+			Allow storage fo arrays of [i]paths[/i] to any kind of [Resource].
+		</constant>
+		<constant name="VT_ColorArray" value="1506" enum="ValueType">
+			Allow storage of arrays of color values.
+		</constant>
+	</constants>
+</class>

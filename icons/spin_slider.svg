@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-miterlimit:10;">
+    <g transform="matrix(1,0,0,1,-120,-24)">
+        <g id="node_colors">
+        </g>
+        <g id="auto_interpolate">
+        </g>
+        <g id="smooth_2d">
+        </g>
+        <g id="smooth_3d">
+        </g>
+        <g id="radial_impulse2d">
+        </g>
+        <g id="radial_impulse3d">
+        </g>
+        <g id="expandable_panel">
+            <g>
+                <path d="M106,32L115,32" style="fill:none;"/>
+                <g transform="matrix(1,-0,-0,1,120,24)">
+                    <path d="M-8.83,6.047L-5.901,8L-8.83,9.953" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;"/>
+                    <path d="M-14,8L-5.901,8" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;stroke-miterlimit:1.5;"/>
+                </g>
+            </g>
+        </g>
+        <g id="spin_slider">
+            <g transform="matrix(1,0,0,1,120,22)">
+                <path d="M3,3C1.903,3 1,3.903 1,5L1,11C1,12.097 1.903,13 3,13L10,13L10,3L3,3ZM13,4L11,7L15,7L13,4ZM3,5L8,5L8,11L3,11L3,5ZM11,9L13,12L15,9L11,9Z" style="fill:rgb(142,239,151);fill-rule:nonzero;"/>
+            </g>
+            <g transform="matrix(0.928571,0,0,1,9.14286,-0.5)">
+                <rect x="121" y="37" width="14" height="2" style="fill:none;stroke:rgb(142,239,151);stroke-width:1.04px;stroke-miterlimit:1.5;"/>
+            </g>
+            <g transform="matrix(1,0,0,1,1,0)">
+                <rect x="127" y="37" width="1" height="1" style="fill:none;stroke:rgb(142,239,151);stroke-width:1px;stroke-miterlimit:1.5;"/>
+            </g>
+        </g>
+        <g id="zoom_in">
+        </g>
+        <g id="zoom_out">
+        </g>
+        <g id="zoom_reset">
+        </g>
+        <g id="grid_toggle">
+        </g>
+        <g id="snap_toggle">
+        </g>
+        <g id="updown">
+        </g>
+    </g>
+</svg>

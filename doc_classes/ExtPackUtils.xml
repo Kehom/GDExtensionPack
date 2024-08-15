@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="ExtPackUtils" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Provides several general use (static) functions.
+	</brief_description>
+	<description>
+		This class only contains static functions, meaning that those can be directly called, without the need to create an instance.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="change_dictionary_key" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="dict" type="Dictionary" />
+			<param index="1" name="key_from" type="Variant" />
+			<param index="2" name="key_to" type="Variant" />
+			<description>
+				Given the [Dictionary] [param dict], change its key from [param key_from] to [param key_to]. This has the same result of:
+				[codeblocks]
+				[gdscript]
+				dict[key_to] = dict[key_from]
+				@warning_ignore("return_value_discarded")
+				dict.erase(key_from)
+				[/gdscript]
+				[/codeblocks]
+				Please note that this function does not verify if [param key_to] exists, meaning that it might be overwritten. And if the [param key_from] does not exist nothing will happen.
+			</description>
+		</method>
+		<method name="get_draw_rect_size" qualifiers="static">
+			<return type="Vector2i" />
+			<param index="0" name="texture" type="Texture2D" />
+			<param index="1" name="constraint" type="Vector2i" />
+			<description>
+				Provided the [param texture] and a size [param constraint], calculate a rect size (and return it) that can be used with a [code]draw_texture_rect()[/code], in such a way that the texture will be drawn with correct aspect ratio inside the specified size constraint.
+			</description>
+		</method>
+		<method name="has_accordion" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]Accordion[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_audio_master" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]AudioMaster[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_auto_interpolate" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]AutoInterpolate[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_expandable_panel" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]ExpandablePanel[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_filedir_picker" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]FileDirPicker[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_quantization" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]Quantization[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_radial_impulse2d" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]RadialImpulse2D[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_radial_impulse3d" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]RadialImpulse3D[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_smooth2d" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]Smooth2D[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_smooth3d" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]Smooth3D[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_spin_slider" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]SpinSlider[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="has_tabular_box" qualifiers="static">
+			<return type="bool" />
+			<description>
+				Return [code]true[/code] if the [b]TabularBox[/b] plugin is compiled within the extension pack.
+			</description>
+		</method>
+		<method name="set_control_anchors" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="control" type="Control" />
+			<param index="1" name="left" type="float" />
+			<param index="2" name="top" type="float" />
+			<param index="3" name="right" type="float" />
+			<param index="4" name="bottom" type="float" />
+			<description>
+				Given the [param control], setup all of its anchors in a single call, assigning [param left] to [member Control.anchor_left], [param top] to [member Control.anchor_top], [param right] to [member Control.anchor_right] and [param bottom] to [member Control.bottom].
+			</description>
+		</method>
+		<method name="set_control_offsets" qualifiers="static">
+			<return type="void" />
+			<param index="0" name="control" type="Control" />
+			<param index="1" name="left" type="float" />
+			<param index="2" name="top" type="float" />
+			<param index="3" name="right" type="float" />
+			<param index="4" name="bottom" type="float" />
+			<description>
+				Given the [param control], setup all of its offsets in a single call, assigning [param left] to [member Control.offset_left], [param top] to [member Control.offset_top], [param right] to [member Control.offset_right] and [param bottom] to [member Control.offset_bottom].
+			</description>
+		</method>
+	</methods>
+</class>

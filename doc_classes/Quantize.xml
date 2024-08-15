@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Quantize" inherits="RefCounted" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+	<brief_description>
+		Provides means to perform (lossy) compression and decompression of floating point numbers.
+	</brief_description>
+	<description>
+		There are a few "wrapper" functions meant to deal with [b]rotation[/b] [Quaternion]s.
+		Since all functions are [i]static[/i], there is no need to create an instance of it.
+		A very important aspect to consider here is the returned "compressed" data. Even if requesting to encode the number into 8 bits, the returned value is in a Variant that holds an integer. This means the full bytes will be "used". However bit masking (and shifting) can be used to pack the returned value with other data.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="compress_rotation_quat" qualifiers="static">
+			<return type="Dictionary" />
+			<param index="0" name="unit_quat" type="Quaternion" />
+			<param index="1" name="numbits" type="int" />
+			<description>
+				Compress the incoming rotation quaternion [param unit_quat], compressing each of its components into [param numbits] number of bits. The used method is called "smallest three", meaning that one of the components will be dropped and recovered when "decompressing" the data. That said, the returned dictionary contains:
+				- [code]a[/code], [code]b[/code] and [code]c[/code] ([i]Integer[/i]): The remaining compressed components. Basically each one stored the return value of [method quantize_float].
+				- [code]index[/code] ([i]Integer[/i]): Indicate which component of hte quaternion was dropped, [code]0 = x[/code], [code]1 = y[/code], [code]2 = z[/code] and [code]3 = w[/code].
+				- [code]sig[/code] ([i]Integer[/i]): The signal of the dropped component (1 if positive, 0 if negative)
+				[b]NOTE[/b]: The [i]signal[/i] is not exactly necessary, but is provided just so if there is any desire to encode it somewhere, it can be used.
+			</description>
+		</method>
+		<method name="compress_rquat_9bits" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="q" type="Quaternion" />
+			<description>
+				Compress the incoming rotation quaternion [param q], quantizing each of its components into [code]9[/code] bits. All data will be packed into the returned value. Later this can be restored by calling [method restore_rquat_9bits].
+			</description>
+		</method>
+		<method name="compress_rquat_10bits" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="q" type="Quaternion" />
+			<description>
+				Compress the incoming rotation quaternion [param q], quantizing each of its components into [code]10[/code] bits. All data will be packed into the returned value. Later this can be restored by calling [method restore_rquat_10bits].
+			</description>
+		</method>
+		<method name="compress_rquat_15bits" qualifiers="static">
+			<return type="PackedInt32Array" />
+			<param index="0" name="q" type="Quaternion" />
+			<description>
+				Compress the incoming rotation quaternion [param q], quantizing each of its components into [code]15[/code] bits. All data will be packed into two elements of the returned array. Later the quaternion can be restored by calling [method restore_rquat_15bits].
+			</description>
+		</method>
+		<method name="quantize_float" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="value" type="float" />
+			<param index="1" name="minval" type="float" />
+			<param index="2" name="maxval" type="float" />
+			<param index="3" name="numbits" type="int" />
+			<description>
+				Compress the floating point number [param value] that must be in range [[param minval]..[param maxval]], into an integer using [param numbits] bits. Two things to note:
+				- While the returned value will be the full integer encoded into a Variant holding an integer, bit masking can be used to discard the irrelevant bits then packed with other data.
+				- The number of bits [param numbits] should not be bigger than [i]32[/i].
+			</description>
+		</method>
+		<method name="quantize_unit_float" qualifiers="static">
+			<return type="int" />
+			<param index="0" name="value" type="float" />
+			<param index="1" name="numbits" type="int" />
+			<description>
+				Compress the floating point number [param value] that must be in range [0..1] into an integer using [param numbits] bits. Two things to note:
+				- While the returned value will be the full integer encoded into a Variant holding an integer, bit masking can be used to discard the irrelevant bits then packed with other data.
+				- The number of bits [param numbits] should not be bigger than [i]32[/i].
+			</description>
+		</method>
+		<method name="restore_float" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="quantized" type="int" />
+			<param index="1" name="minval" type="float" />
+			<param index="2" name="maxval" type="float" />
+			<param index="3" name="numbits" type="int" />
+			<description>
+				Restores the [param quantized] floating point number that got compressed by [method quantize_float]. The [param minval], [param maxval] and [param numbits] parameters must be identical to those used when the number got compressed.
+			</description>
+		</method>
+		<method name="restore_rotation_quat" qualifiers="static">
+			<return type="Quaternion" />
+			<param index="0" name="quant" type="Dictionary" />
+			<param index="1" name="numbits" type="int" />
+			<description>
+				Given the compressed rotation quaternion data in the [param quant] parameter, that got compressed by [method compress_rotation_quat], restore and returns the [Quaternion]. Note that [param numbits] must be identical to that used when the quaternion got compressed.
+			</description>
+		</method>
+		<method name="restore_rquat_9bits" qualifiers="static">
+			<return type="Quaternion" />
+			<param index="0" name="compressed" type="int" />
+			<description>
+				Given the compressed rotation quaternion data in the [param compressed], which was compressed by [method compress_rquat_9bits], restore and returns the [Quaternion].
+			</description>
+		</method>
+		<method name="restore_rquat_10bits" qualifiers="static">
+			<return type="Quaternion" />
+			<param index="0" name="compressed" type="int" />
+			<description>
+				Given the compressed rotation quaternion data in the [param compressed], which was compressed by [method compress_rquat_10bits], restore and returns the [Quaternion].
+			</description>
+		</method>
+		<method name="restore_rquat_15bits" qualifiers="static">
+			<return type="Quaternion" />
+			<param index="0" name="pack0" type="int" />
+			<param index="1" name="pack1" type="int" />
+			<description>
+				Given the compressed rotation quaternion data compressed by [method compress_rquat_15bits], array element [i]0[/i] in [param pack0] and array element [i]1[/i] in [param pack1], restore and returns the [Quaternion].
+			</description>
+		</method>
+		<method name="restore_unit_float" qualifiers="static">
+			<return type="float" />
+			<param index="0" name="quantized" type="int" />
+			<param index="1" name="numbits" type="int" />
+			<description>
+				Restores the [param quantized] floating point number that got compressed by [method quantize_unit_float]. The [param numbits] must be identical to that used when the number got compressed.
+			</description>
+		</method>
+	</methods>
+</class>

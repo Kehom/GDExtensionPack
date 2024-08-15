@@ -1,0 +1,97 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "build dev",
+         "type": "shell",
+         "command": "scons",
+         "args": [
+            "-j6",
+            "target=template_debug",
+            "profile=prof_debug.py",
+            "copy_bin_to_demo=1"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         },
+         "problemMatcher": []
+      },
+      {
+         "label": "build release",
+         "type": "shell",
+         "command": "scons",
+         "args": [
+            "-j6",
+            "target=template_release",
+            "profile=prof_release.py",
+            "copy_bin_to_demo=1"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": false
+         },
+         "problemMatcher": []
+      },
+      {
+        "label": "cross compile dev",
+         "type": "shell",
+         "command": "scons",
+         "args": [
+            "-j6",
+            "target=template_debug",
+            "profile=prof_debug.py",
+            "platform=windows",
+            "arch=x86_64"
+         ],
+         "problemMatcher": []
+      },
+      {
+         "label": "cross compile rel",
+         "type": "shell",
+         "command": "scons",
+         "args": [
+            "-j6",
+            "target=template_release",
+            "profile=prof_relese.py",
+            "platform=windows",
+            "arch=x86_64"
+         ],
+         "problemMatcher": []
+      },
+      {
+         "label": "generate docs",
+         "type": "shell",
+         "command": "godot",
+         "args": [
+            "--path",
+            "${workspaceFolder}/demo",
+            "--doctool",
+            "../",
+            "--gdextension-docs"
+         ],
+         "problemMatcher": []
+      },
+      {
+         "label": "edit demo",
+         "type": "shell",
+         "command": "godot",
+         "args": [
+            "--path",
+            "${workspaceFolder}/demo",
+            "--editor"
+         ],
+         "problemMatcher": []
+      },
+      {
+         "label": "run demo",
+         "type": "shell",
+         "command": "godot",
+         "args": [
+            "--path",
+            "${workspaceFolder}/demo"
+         ],
+         "problemMatcher": []
+      }
+   ]
+}
